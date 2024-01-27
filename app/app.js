@@ -1,15 +1,7 @@
 const express = require('express');
-
 const app = express();
+const postRoute = require('../routes/posts');
 
+app.use('/post', postRoute);
 
-app.get('/', (req, res) => {
-    res.send("tes respons");
-});
-res.send("tes respons api");
-
-app.get('/api', (req, res) => {
-    
-});
-
-module.exports = app
+module.exports = app;
