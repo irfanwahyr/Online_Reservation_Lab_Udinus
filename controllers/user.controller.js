@@ -1,9 +1,24 @@
 const models = require('../models');
+const { userSchema } = require('../validation/user_validation');
 
-const save = async (req, res) => {
+const create = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
+    // Validasi data input
+    const { error, value } = userSchema({
+      username: username,
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      return res.status(400).json({
+        message: "Invalid input data",
+      });
+    }
+
+    // Data input valid, lanjutkan dengan operasi create
     const newUser = await models.Users.create({
       username: username,
       email: email,
@@ -12,16 +27,18 @@ const save = async (req, res) => {
     });
 
     res.status(201).json({
-      message: "created new user"
+      message: "Created new user"
     });
   } catch (e) {
+    console.error(e);
     res.status(500).json({
-      message: "can\'t create new user"
+      message: "Something went wrong",
     });
   }
 };
 
-async function show(req, res) {
+
+async function show_by_id(req, res) {
   try {
     const id = req.params.id;
 
@@ -67,7 +84,18 @@ async function update(req, res) {
     const id = req.params.id;
     const { username, email, password } = req.body;
 
-    // Validate or sanitize input data if needed
+    // Validasi data input
+    const { error, value } = userSchema({
+      username: username,
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      return res.status(400).json({
+        message: "Invalid input data",
+      });
+    }
 
     const [updatedRowsCount] = await models.Users.update(
       { username, email, password },
@@ -124,8 +152,8 @@ async function destroy(req, res) {
 
 
 module.exports = {
-  save,
-  show,
+  create,
+  show_by_id,
   index,
   update,
   destroy,
