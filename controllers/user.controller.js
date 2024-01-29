@@ -32,7 +32,7 @@ const signUp = async (req, res) => {
         message: "Email must be unique",
       });
     }
-
+    // komentar
     // Hash the password
     const hashedPassword = await hashPass(password);
 
