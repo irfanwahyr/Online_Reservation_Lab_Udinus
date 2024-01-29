@@ -119,7 +119,12 @@ async function show_by_id(req, res) {
     const result = await models.Users.findByPk(id);
 
     if (result) {
-      res.status(200).json(result);
+      const {id, username, email } = result;
+      res.status(200).json({
+        id,
+        username,
+        email
+      });
     } else {
       res.status(404).json({
         message: "User not found",
@@ -134,10 +139,16 @@ async function show_by_id(req, res) {
 
 async function index(_, res) {
   try {
-    const result = await models.Users.findAll();
+    const results = await models.Users.findAll();
 
-    if (result && result.length > 0) {
-      res.status(200).json(result);
+    if (results && results.length > 0) {
+      const usersData = results.map(({ id, username, email }) => ({
+        id,
+        username,
+        email,
+      }));
+
+      res.status(200).json(usersData);
     } else {
       res.status(200).json({
         message: "No users found",
@@ -151,16 +162,20 @@ async function index(_, res) {
 }
 
 
+
 async function update(req, res) {
   try {
     const id = req.params.id;
     const { username, email, password } = req.body;
 
+    // Hash the password
+    const hashedPassword = await hashPass(password);
+
     // Validasi data input
     const { error, value } = userSchema({
       username: username,
       email: email,
-      password: password,
+      password: hashedPassword,
     });
 
     if (error) {
