@@ -16,7 +16,6 @@ function userSchema(data) {
 
     // Validation for password
     password: Joi.string()
-      .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
       .required(),
   });
 
