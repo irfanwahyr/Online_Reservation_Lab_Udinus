@@ -18,6 +18,6 @@ app.use(bodyParser.json());
 
 app.use('/users', userRoute);
 app.use('/labs', labRoute);
-app.use('/sw_primers', labRoute);
+app.use('/sw_primers', swprimerRoute);
 
 module.exports = app;
