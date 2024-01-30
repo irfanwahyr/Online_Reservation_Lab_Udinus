@@ -5,7 +5,7 @@ async function create(req, res) {
         const { nama, versi, lab_pakai } = req.body;
 
         // Data input valid, continue with the create operation
-        await models.Software.create({
+        await models.Software_Primer.create({
             nama: nama,
             versi: versi,
             lab_pakai: lab_pakai,
@@ -23,26 +23,24 @@ async function create(req, res) {
 
 async function index(_, res) {
     try {
-        const results = await models.Laboratorium.findAll();
+        const results = await models.Software_Primer.findAll();
 
         if (results && results.length > 0) {
-            const labsData = results.map(({ id_software, nama, jml_PC, jenis_lab, deskripsi }) => ({
-                id_software,
+            const sw_primer = results.map(({ nama, versi, lab_pakai }) => ({
                 nama,
-                jml_PC,
-                jenis_lab,
-                deskripsi
+                versi,
+                lab_pakai
             }));
 
-            res.status(200).json(labsData);
+            res.status(200).json(sw_primer);
         } else {
             res.status(200).json({
-                message: "No Labs found",
+                message: "No Software_primer found",
             });
         }
     } catch (error) {
         res.status(500).json({
-            message: "Unable to retrieve labs data. Something went wrong.",
+            message: "Unable to retrieve software_primer data. Something went wrong.",
         });
     }
 }
@@ -50,21 +48,21 @@ async function index(_, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { id_software, nama, jml_PC, jenis_lab, deskripsi } = req.body;
+      const { nama, versi, lab_pakai } = req.body;
 
-      const [updatedRowsCount] = await models.Laboratorium.update(
-        { id_software ,nama, jml_PC, jenis_lab, deskripsi },
+      const [updatedRowsCount] = await models.Software_Primer.update(
+        { nama, versi, lab_pakai },
         { where: { id: id } }
       );
 
       if (updatedRowsCount > 0) {
         res.status(200).json({
-          message: "Labs updated successfully",
+          message: "Software_primer updated successfully",
         });
       } else {
         res.status(404).json({
           status: res.status,
-          message: "Labs not found",
+          message: "Software_primer not found",
         });
       }
     } catch (error) {
@@ -80,19 +78,19 @@ async function destroy(req, res) {
     try {
         const id = req.params.id;
 
-        const deletedRowsCount = await models.Laboratorium.destroy({
+        const deletedRowsCount = await models.Software_Primer.destroy({
             where: { id: id }
         });
 
         if (deletedRowsCount > 0) {
             res.status(200).json({
                 status: res.status,
-                message: "labs deleted successfully",
+                message: "Software_primer deleted successfully",
             });
         } else {
             res.status(404).json({
                 status: res.status,
-                message: "labs not found",
+                message: "Software_primer not found",
             });
         }
     } catch (error) {
@@ -108,25 +106,23 @@ async function show_by_id(req, res) {
     try {
         const id = req.params.id;
 
-        const result = await models.Laboratorium.findByPk(id);
+        const result = await models.Software_Primer.findByPk(id);
 
         if (result) {
-            const {id_software, nama, jml_PC, jenis_lab, deskripsi } = result;
+            const { nama, versi, lab_pakai } = result;
             res.status(200).json({
-                id_software,
                 nama,
-                jml_PC,
-                jenis_lab,
-                deskripsi
+                versi,
+                lab_pakai
             });
         } else {
             res.status(404).json({
-                message: "Labs not found",
+                message: "software_primer not found",
             });
         }
     } catch (error) {
         res.status(500).json({
-            message: "Internal Server Error",
+            message: "software_primer Error",
         });
     }
 }

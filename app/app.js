@@ -17,5 +17,6 @@ app.use(bodyParser.json());
 
 app.use('/users', userRoute);
 app.use('/labs', labRoute);
+app.use('/sw_primers', labRoute);
 
 module.exports = app;
