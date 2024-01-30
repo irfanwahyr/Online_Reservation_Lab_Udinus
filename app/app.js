@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const userRoute = require('../routes/users');
 const labRoute = require('../routes/labs');
+const swprimerRoute = require('../routes/sw_primer')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
