@@ -2,10 +2,10 @@ const models = require('../models');
 
 async function create(req, res) {
     try {
-        const { id_software ,nama, jml_PC, jenis_lab, deskripsi } = req.body;
+        const { id_sw_primer ,id_sw_sekunder } = req.body;
 
         // Data input valid, continue with the create operation
-        await models.Laboratorium.create({
+        await models.Software.create({
             id_software: id_software,
             nama: nama,
             jml_PC: jml_PC,

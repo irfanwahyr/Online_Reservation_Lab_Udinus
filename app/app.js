@@ -8,7 +8,7 @@ const cors = require('cors');
 const corsOptions = {
     origin: 'http://localhost:3001',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,  // Mengizinkan pengiriman kredensial (cookie, token, dsb.)
+    credentials: true,
     optionsSuccessStatus: 204,
   };
 

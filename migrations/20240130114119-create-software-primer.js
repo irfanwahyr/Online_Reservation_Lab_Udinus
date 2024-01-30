@@ -2,28 +2,22 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Laboratoria', {
+    await queryInterface.createTable('Software_Primers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_software: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
       nama: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      jml_PC: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      jenis_lab: {
-        allowNull: false,
+      versi: {
         type: Sequelize.STRING
+      },
+      lab_pakai: {
+        type: Sequelize.CHAR
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +30,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Laboratoria');
+    await queryInterface.dropTable('Software_Primers');
   }
 };
