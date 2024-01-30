@@ -2,19 +2,17 @@ const models = require('../models');
 
 async function create(req, res) {
     try {
-        const { id_sw_primer ,id_sw_sekunder } = req.body;
+        const { nama, versi, lab_pakai } = req.body;
 
         // Data input valid, continue with the create operation
         await models.Software.create({
-            id_software: id_software,
             nama: nama,
-            jml_PC: jml_PC,
-            jenis_lab: jenis_lab,
-            deskripsi: deskripsi
+            versi: versi,
+            lab_pakai: lab_pakai,
         });
 
         return res.status(201).json({
-            message: "Created new Laboratorium"
+            message: "Created new Data Software Primer"
           });
     } catch (error) {
         return res.status(500).json({
