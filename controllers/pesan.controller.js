@@ -2,18 +2,15 @@ const models = require('../models');
 
 async function create(req, res) {
     try {
-        const { nama_jadwal, jam_mulai, jam_selesai, id_hari } = req.body;
+        const { status, id_jadwal } = req.body;
 
-        // Data input valid, continue with the create operation
-        await models.Jadwal.create({
-            nama_jadwal: nama_jadwal,
-            jam_mulai: jam_mulai,
-            jam_selesai: jam_selesai,
-            id_hari, id_hari
+        await models.Pesan.create({
+            status: status,
+            id_jadwal: id_jadwal
         });
 
         return res.status(201).json({
-            message: "Created new Data jadwal"
+            message: "Created new Data pesan"
           });
     } catch (error) {
         return res.status(500).json({
@@ -24,25 +21,23 @@ async function create(req, res) {
 
 async function index(_, res) {
     try {
-        const results = await models.Jadwal.findAll();
+        const results = await models.Pesan.findAll();
 
         if (results && results.length > 0) {
-            const jadwals = results.map(({ nama_jadwal, jam_mulai, jam_selesai, id_hari }) => ({
-                nama_jadwal,
-                jam_mulai,
-                jam_selesai,
-                id_hari
+            const pesans = results.map(({ status, id_jadwal }) => ({
+                status,
+                id_jadwal
             }));
 
-            res.status(200).json(jadwals);
+            res.status(200).json(pesans);
         } else {
             res.status(200).json({
-                message: "No jadwal found",
+                message: "No pesan found",
             });
         }
     } catch (error) {
         res.status(500).json({
-            message: "Unable to retrieve jadwal data. Something went wrong.",
+            message: "Unable to retrieve pesan data. Something went wrong.",
         });
     }
 }
@@ -50,21 +45,21 @@ async function index(_, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { nama_jadwal, jam_mulai, jam_selesai, id_hari } = req.body;
+      const { status, id_jadwal } = req.body;
 
-      const [updatedRowsCount] = await models.Jadwal.update(
-        { nama_jadwal, jam_mulai, jam_selesai, id_hari },
+      const [updatedRowsCount] = await models.Pesan.update(
+        { status, id_jadwal },
         { where: { id: id } }
       );
 
       if (updatedRowsCount > 0) {
         res.status(200).json({
-          message: "jadwal updated successfully",
+          message: "pesan updated successfully",
         });
       } else {
         res.status(404).json({
           status: res.status,
-          message: "jadwal not found",
+          message: "pesan not found",
         });
       }
     } catch (error) {
@@ -80,19 +75,19 @@ async function destroy(req, res) {
     try {
         const id = req.params.id;
 
-        const deletedRowsCount = await models.Jadwal.destroy({
+        const deletedRowsCount = await models.Pesan.destroy({
             where: { id: id }
         });
 
         if (deletedRowsCount > 0) {
             res.status(200).json({
                 status: res.status,
-                message: "jadwal deleted successfully",
+                message: "pesan deleted successfully",
             });
         } else {
             res.status(404).json({
                 status: res.status,
-                message: "jadwal not found",
+                message: "pesan not found",
             });
         }
     } catch (error) {
@@ -108,24 +103,22 @@ async function show_by_id(req, res) {
     try {
         const id = req.params.id;
 
-        const result = await models.Jadwal.findByPk(id);
+        const result = await models.Pesan.findByPk(id);
 
         if (result) {
-            const { nama_jadwal, jam_mulai, jam_selesai, id_hari } = result;
+            const { status, id_jadwal } = result;
             res.status(200).json({
-                nama_jadwal,
-                jam_mulai,
-                jam_selesai,
-                id_hari
+                status,
+                id_jadwal
             });
         } else {
             res.status(404).json({
-                message: "jadwal not found",
+                message: "pesan not found",
             });
         }
     } catch (error) {
         res.status(500).json({
-            message: "jadwal Error",
+            message: "something Error",
         });
     }
 }
