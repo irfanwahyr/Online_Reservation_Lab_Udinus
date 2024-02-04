@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Software_Primer extends Model {
+  class PDF_filename extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,20 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Software_Primer.belongsToMany(models.Laboratorium, {
-        through: 'lab_pakai',
-        foreignKey: 'nama',
-        as: 'laboratorium',
-      });
     }
   }
-  Software_Primer.init({
+  PDF_filename.init({
     nama: DataTypes.STRING,
-    versi: DataTypes.STRING,
-    lab_pakai: DataTypes.CHAR
+    is_proposal: DataTypes.BOOLEAN
   }, {
     sequelize,
-    modelName: 'Software_Primer',
+    modelName: 'PDF_filename',
   });
-  return Software_Primer;
+  return PDF_filename;
 };

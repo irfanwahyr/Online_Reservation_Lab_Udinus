@@ -11,7 +11,7 @@ module.exports = {
       },
       nama_hari: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

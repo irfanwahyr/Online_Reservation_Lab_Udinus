@@ -9,13 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_software: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
       nama: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       jml_PC: {
         allowNull: false,

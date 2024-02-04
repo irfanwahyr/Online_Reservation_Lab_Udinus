@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       lab_pakai: {
-        type: Sequelize.CHAR
+        type: Sequelize.CHAR,
       },
       createdAt: {
         allowNull: false,

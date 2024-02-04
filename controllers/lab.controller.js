@@ -1,4 +1,5 @@
 const models = require('../models');
+const { Sequelize } = require('sequelize');
 
 async function create(req, res) {
     try {
@@ -28,12 +29,11 @@ async function index(_, res) {
         const results = await models.Laboratorium.findAll();
 
         if (results && results.length > 0) {
-            const labsData = results.map(({ id_software, nama, jml_PC, jenis_lab, deskripsi }) => ({
-                id_software,
+            const labsData = results.map(({ nama, jml_PC, jenis_lab, deskripsi, softwarePrimer, softwareSekunder }) => ({
                 nama,
                 jml_PC,
                 jenis_lab,
-                deskripsi
+                deskripsi,
             }));
 
             res.status(200).json(labsData);
@@ -43,11 +43,13 @@ async function index(_, res) {
             });
         }
     } catch (error) {
+        console.error(error);
         res.status(500).json({
             message: "Unable to retrieve labs data. Something went wrong.",
         });
     }
 }
+
 
 async function update(req, res) {
     try {

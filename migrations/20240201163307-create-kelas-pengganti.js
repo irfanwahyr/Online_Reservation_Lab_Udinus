@@ -15,7 +15,7 @@ module.exports = {
       },
       id_jadwal: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

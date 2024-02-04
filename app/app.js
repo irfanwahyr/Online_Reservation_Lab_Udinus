@@ -11,6 +11,7 @@ const pesanRoute = require('../routes/pesans')
 const kpRoute = require('../routes/kelas_pgnt')
 const keperRoute = require('../routes/keperluan')
 const peminRoute = require('../routes/peminjaman')
+const fileRoute = require('../routes/file')
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -24,6 +25,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
+app.use('/uploads', express.static('uploads'));
 
 app.use('/users', userRoute);
 app.use('/labs', labRoute);
@@ -35,5 +37,6 @@ app.use('/pesans', pesanRoute);
 app.use('/kp_pgnt', kpRoute);
 app.use('/keperluans', keperRoute);
 app.use('/peminjamans', peminRoute);
+app.use('/files', fileRoute);
 
 module.exports = app;

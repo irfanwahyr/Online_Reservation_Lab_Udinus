@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Software_Sekunders', {
+    await queryInterface.createTable('PDF_filenames', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,11 +13,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      versi: {
-        type: Sequelize.STRING
-      },
-      lab_pakai: {
-        type: Sequelize.CHAR,
+      is_proposal: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -30,6 +28,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Software_Sekunders');
+    await queryInterface.dropTable('PDF_filenames');
   }
 };

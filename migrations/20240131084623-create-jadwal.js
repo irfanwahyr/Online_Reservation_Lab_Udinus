@@ -22,7 +22,7 @@ module.exports = {
       },
       id_hari: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
