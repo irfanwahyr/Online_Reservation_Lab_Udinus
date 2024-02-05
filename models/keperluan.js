@@ -11,11 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Keperluan.hasOne(models.Kelas_Pengganti, {
+        foreignKey: 'id_keperluan',
+        as: 'kelas_penggantis',
+      });
     }
   }
-  Keperluan.init({
-    kode_keperluan: DataTypes.INTEGER
-  }, {
+  Keperluan.init({},
+    {
     sequelize,
     modelName: 'Keperluan',
   });

@@ -11,7 +11,7 @@ module.exports = {
       },
       nama: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.CHAR,
         unique: true
       },
       jml_PC: {

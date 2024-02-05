@@ -9,9 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      kode_keperluan: {
+      nama_keperluan: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

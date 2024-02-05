@@ -20,9 +20,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      id_hari: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
+      id_pesan: {
+        allowNull: true,
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

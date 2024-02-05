@@ -13,10 +13,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      id_jadwal: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

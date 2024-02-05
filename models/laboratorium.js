@@ -1,11 +1,17 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Laboratorium extends Model {
     static associate(models) {
-      // define association here
+      Laboratorium.hasMany(models.Software_Primer, {
+        foreignKey: 'id_lab',
+        as: 'software_primers',
+      });
+
+      Laboratorium.hasMany(models.Software_Sekunder, {
+        foreignKey: 'id_lab',
+        as: 'software_sekunders',
+      });
     }
   }
   Laboratorium.init({

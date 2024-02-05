@@ -11,9 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Software_Primer.belongsToMany(models.Laboratorium, {
-        through: 'lab_pakai',
-        foreignKey: 'nama',
+      Software_Primer.belongsTo(models.Laboratorium, {
+        foreignKey: 'id_lab',
         as: 'laboratorium',
       });
     }
@@ -21,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   Software_Primer.init({
     nama: DataTypes.STRING,
     versi: DataTypes.STRING,
-    lab_pakai: DataTypes.CHAR
+    id_lab: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Software_Primer',

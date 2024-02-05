@@ -11,10 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Kelas_Pengganti.belongsTo(models.Keperluan, {
+        foreignKey: 'id_keperluan',
+        as: 'keperluan',
+      });
     }
   }
   Kelas_Pengganti.init({
-    kode_keperluan: DataTypes.INTEGER,
+    id_keperluan: DataTypes.INTEGER,
     id_jadwal: DataTypes.INTEGER
   }, {
     sequelize,

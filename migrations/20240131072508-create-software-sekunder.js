@@ -16,8 +16,8 @@ module.exports = {
       versi: {
         type: Sequelize.STRING
       },
-      lab_pakai: {
-        type: Sequelize.CHAR,
+      id_lab: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

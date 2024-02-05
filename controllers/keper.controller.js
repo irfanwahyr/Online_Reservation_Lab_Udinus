@@ -5,8 +5,9 @@ async function index(_, res) {
         const results = await models.Keperluan.findAll();
 
         if (results && results.length > 0) {
-            const keperluan = results.map(({ kode_keperluan }) => ({
-                kode_keperluan,
+            const keperluan = results.map(({ id, kelas_penggantis }) => ({
+                id,
+                kelas_penggantis
             }));
 
             res.status(200).json(keperluan);
@@ -26,12 +27,20 @@ async function show_by_id(req, res) {
     try {
         const id = req.params.id;
 
-        const result = await models.Keperluan.findByPk(id);
+        const result = await models.Keperluan.findByPk(id, {
+            include: [
+                {
+                    model: models.Kelas_Pengganti,
+                    as: 'kelas_penggantis',
+                    attributes: ['id_keperluan', 'id_jadwal']
+                }
+            ]
+        });
 
         if (result) {
-            const { kode_keperluan } = result;
+            const { kelas_penggantis } = result;
             res.status(200).json({
-                kode_keperluan,
+                kelas_penggantis
             });
         } else {
             res.status(404).json({
@@ -39,6 +48,7 @@ async function show_by_id(req, res) {
             });
         }
     } catch (error) {
+        console.error(error);
         res.status(500).json({
             message: "Internal Server Error",
         });

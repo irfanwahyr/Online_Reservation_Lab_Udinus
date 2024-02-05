@@ -26,14 +26,29 @@ async function create(req, res) {
 
 async function index(_, res) {
     try {
-        const results = await models.Laboratorium.findAll();
+        const results = await models.Laboratorium.findAll({
+            include: [{
+                model: models.Software_Primer,
+                as: 'software_primers',
+                attributes: ['nama', 'versi']
+            },
+            {
+                model: models.Software_Sekunder,
+                as: 'software_sekunders',
+                attributes: ['nama', 'versi']
+            },
+        ]
+        });
 
         if (results && results.length > 0) {
-            const labsData = results.map(({ nama, jml_PC, jenis_lab, deskripsi, softwarePrimer, softwareSekunder }) => ({
+            const labsData = results.map(({ id, nama, jml_PC, jenis_lab, deskripsi, software_primers ,software_sekunders }) => ({
+                id,
                 nama,
                 jml_PC,
                 jenis_lab,
                 deskripsi,
+                software_primers,
+                software_sekunders,
             }));
 
             res.status(200).json(labsData);
