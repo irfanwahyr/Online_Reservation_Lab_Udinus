@@ -5,9 +5,8 @@ async function index(_, res) {
         const results = await models.Keperluan.findAll();
 
         if (results && results.length > 0) {
-            const keperluan = results.map(({ id, kelas_penggantis }) => ({
+            const keperluan = results.map(({ id }) => ({
                 id,
-                kelas_penggantis
             }));
 
             res.status(200).json(keperluan);
@@ -38,8 +37,9 @@ async function show_by_id(req, res) {
         });
 
         if (result) {
-            const { kelas_penggantis } = result;
+            const { id, kelas_penggantis } = result;
             res.status(200).json({
+                id,
                 kelas_penggantis
             });
         } else {
