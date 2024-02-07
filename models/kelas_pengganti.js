@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id_keperluan',
         as: 'keperluan',
       });
-      Kelas_Pengganti.hasOne(models.Jadwal, {
+      Kelas_Pengganti.belongsTo(models.Jadwal, {
         foreignKey: 'id_jadwal',
         as: 'jadwal',
       });

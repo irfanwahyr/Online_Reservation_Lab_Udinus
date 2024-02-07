@@ -11,9 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Jadwal.belongsTo(models.Kelas_Pengganti, {
+      Jadwal.hasOne(models.Kelas_Pengganti, {
         foreignKey: 'id_jadwal',
         as: 'kelas_pengganti'
+      });
+
+      Jadwal.belongsTo(models.Hari, {
+        foreignKey: 'id_hari',
+        as: 'hari'
+      });
+
+      Jadwal.belongsTo(models.Pesan, {
+        foreignKey: 'id_pesan',
+        as: 'pesan'
       });
     }
   }
@@ -22,7 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     nama_jadwal: DataTypes.STRING,
     jam_mulai: DataTypes.INTEGER,
     jam_selesai: DataTypes.INTEGER,
-    id_pesan: DataTypes.INTEGER
+    id_pesan: DataTypes.INTEGER,
+    id_hari: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Jadwal',

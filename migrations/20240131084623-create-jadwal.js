@@ -23,6 +23,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      id_hari: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Haris',
+          key: 'id'
+        }
+      },
       id_pesan: {
         allowNull: true,
         type: Sequelize.INTEGER,

@@ -22,46 +22,13 @@ async function create(req, res) {
 
 async function index(_, res) {
     try {
-        const results = await models.Peminjaman.findAll({
-            include: [
-                {
-                    model: models.Users,
-                    as: 'user',
-                    attributes: ['username', 'email']
-                },
-                {
-                    model: models.Laboratorium,
-                    as: 'laboratorium',
-                    attributes: ['nama', 'jml_PC', 'jenis_lab', 'deskripsi'],
-                    include: [
-                        {
-                            model: models.Software_Primer,
-                            as: 'software_primers'
-                        }
-                    ]
-                },
-                {
-                    model: models.Keperluan,
-                    as: 'keperluan',
-                    attributes: ['nama_keperluan']
-                }
-            ]
-        });
+        const results = await models.Peminjaman.findAll({});
 
         if (results && results.length > 0) {
-            const peminjams = results.map(({ id_user, user, id_lab, laboratorium, id_keperluan, keperluan }) => ({
+            const peminjams = results.map(({ id_user, id_lab, id_keperluan }) => ({
                 id_user,
-                user,
                 id_lab,
-                laboratorium: {
-                    nama: laboratorium.nama,
-                    jml_PC: laboratorium.jml_PC,
-                    jenis_lab: laboratorium.jenis_lab,
-                    deskripsi: laboratorium.deskripsi,
-                    Software_Primer: laboratorium.software_primers,
-                },
-                id_keperluan,
-                keperluan
+                id_keperluan
             }));
 
             res.status(200).json(peminjams);
@@ -81,8 +48,14 @@ async function index(_, res) {
 async function show_by_id(req, res) {
     try {
         const id = req.params.id;
+        const id_user = 2;
 
-        const result = await models.Peminjaman.findByPk(id);
+        const result = await models.Peminjaman.findOne({
+            where: {
+                id: id,
+                id_user: id_user
+            }
+        });
 
         if (result) {
             const { id_user, id_lab, id_keperluan } = result;

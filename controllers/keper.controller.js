@@ -7,17 +7,22 @@ async function index(_, res) {
                 {
                     model: models.Kelas_Pengganti,
                     as: 'kelas_pengganti',
-                    attributes: ['id_keperluan', 'id_jadwal'],
+                    attributes: [ 'id', 'id_keperluan', 'id_jadwal'],
                     include: [
                         {
                             model: models.Jadwal,
                             as: 'jadwal',
-                            attributes: ['nama_jadwal', 'jam_mulai', 'jam_selesai'],
+                            attributes: [ 'id', 'nama_jadwal', 'jam_mulai', 'jam_selesai'],
                             include: [
+                                {
+                                    model: models.Hari,
+                                    as: 'hari',
+                                    attributes: ['id', 'nama_hari']
+                                },
                                 {
                                     model: models.Pesan,
                                     as: 'pesan',
-                                    attributes: ['status'],
+                                    attributes: [ 'id', 'status'],
                                 },
                             ],
                         },
@@ -28,18 +33,14 @@ async function index(_, res) {
 
         if (results && results.length > 0) {
             const keperluan = results.map(({ id, nama_keperluan, kelas_pengganti }) => ({
-                id,
-                nama_keperluan,
-                kelas_pengganti: {
-                    id_keperluan: kelas_pengganti.id_keperluan,
-                    id_jadwal: kelas_pengganti.id_jadwal,
-                    jadwal: {
-                        nama_jadwal: kelas_pengganti.jadwal.nama_jadwal,
-                        jam_mulai: kelas_pengganti.jadwal.jam_mulai,
-                        jam_selesai: kelas_pengganti.jadwal.jam_selesai,
-                        pesan: kelas_pengganti.jadwal.pesan
-                    }
-                },
+                keterangan: "informasi keperluan",
+                data: {
+                    id,
+                    nama_keperluan,
+                    kelas_pengganti: {
+                        jadwal: kelas_pengganti.jadwal
+                    },
+                }
             }));
 
             res.status(200).json(keperluan);

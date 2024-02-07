@@ -30,12 +30,12 @@ async function index(_, res) {
             include: [{
                 model: models.Software_Primer,
                 as: 'software_primers',
-                attributes: ['nama', 'versi']
+                attributes: [ 'id', 'nama', 'versi']
             },
             {
                 model: models.Software_Sekunder,
                 as: 'software_sekunders',
-                attributes: ['nama', 'versi']
+                attributes: [ 'id', 'nama', 'versi']
             },
         ]
         });

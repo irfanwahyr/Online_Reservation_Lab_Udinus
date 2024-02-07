@@ -13,14 +13,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      id_jadwal: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Jadwals',
-          key: 'id'
-        },
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
