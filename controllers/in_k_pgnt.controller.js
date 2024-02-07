@@ -1,23 +1,39 @@
 const models = require('../models');
-const { Sequelize } = require('sequelize');
 
 async function create(req, res) {
     try {
-        const { id_software ,nama, jml_PC, jenis_lab, deskripsi } = req.body;
+        const {
+            nm_dosen,
+            mt_kuliah,
+            kd_mk,
+            no_wa,
+            ruangan,
+            tgl,
+            jam_mulai,
+            jam_selesai,
+            ket
+        } = req.body;
 
-        // Data input valid, continue with the create operation
-        await models.Laboratorium.create({
-            id_software: id_software,
-            nama: nama,
-            jml_PC: jml_PC,
-            jenis_lab: jenis_lab,
-            deskripsi: deskripsi
+        // parse tgl to type date
+        const parsedTgl = new Date(tgl);
+
+        await models.input_KP.create({
+            nm_dosen: nm_dosen,
+            mt_Kuliah: mt_kuliah,
+            kd_mk: kd_mk,
+            no_wa: no_wa,
+            ruangan: ruangan,
+            tgl: parsedTgl,
+            jam_mulai: jam_mulai,
+            jam_selesai: jam_selesai,
+            ket: ket
         });
 
         return res.status(201).json({
-            message: "Created new Laboratorium"
+            message: "Created new request reservation kelas pengganti"
           });
     } catch (error) {
+        console.error(error);
         return res.status(500).json({
             message: "Something went wrong",
         });
@@ -26,41 +42,47 @@ async function create(req, res) {
 
 async function index(_, res) {
     try {
-        const results = await models.Laboratorium.findAll({
-            include: [{
-                model: models.Software_Primer,
-                as: 'software_primers',
-                attributes: ['nama', 'versi']
-            },
-            {
-                model: models.Software_Sekunder,
-                as: 'software_sekunders',
-                attributes: ['nama', 'versi']
-            },
-        ]
-        });
+        const results = await models.input_KP.findAll();
 
         if (results && results.length > 0) {
-            const labsData = results.map(({ id, nama, jml_PC, jenis_lab, deskripsi, software_primers ,software_sekunders }) => ({
-                id,
-                nama,
-                jml_PC,
-                jenis_lab,
-                deskripsi,
-                software_primers,
-                software_sekunders,
+            const input_kp = results.map((
+                {
+                    id,
+                    nm_dosen,
+                    mt_kuliah,
+                    kd_mk,
+                    no_wa,
+                    ruangan,
+                    tgl,
+                    jam_mulai,
+                    jam_selesai,
+                    ket
+
+                }) => ({
+                    keterangan: "data input kelas pengganti",
+                    data: {
+                        id,
+                        nm_dosen,
+                        mt_kuliah,
+                        kd_mk,
+                        no_wa,
+                        ruangan,
+                        tgl,
+                        jam_mulai,
+                        jam_selesai,
+                        ket
+                    }
             }));
 
-            res.status(200).json(labsData);
+            res.status(200).json(input_kp);
         } else {
             res.status(200).json({
-                message: "No Labs found",
+                message: "No input data kelas pengganti found",
             });
         }
     } catch (error) {
-        console.error(error);
         res.status(500).json({
-            message: "Unable to retrieve labs data. Something went wrong.",
+            message: "Unable to retrieve kelas pengganti data. Something went wrong.",
         });
     }
 }
@@ -69,27 +91,48 @@ async function index(_, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { id_software, nama, jml_PC, jenis_lab, deskripsi } = req.body;
+      const {
+        nm_dosen,
+        mt_kuliah,
+        kd_mk,
+        no_wa,
+        ruangan,
+        tgl,
+        jam_mulai,
+        jam_selesai,
+        ket
+      } = req.body;
 
-      const [updatedRowsCount] = await models.Laboratorium.update(
-        { id_software ,nama, jml_PC, jenis_lab, deskripsi },
+      // parse tgl to type date
+      const parsedTgl = new Date(tgl);
+
+      const [updatedRowsCount] = await models.input_KP.update(
+        {
+            nm_dosen,
+            mt_kuliah,
+            kd_mk,
+            no_wa,
+            ruangan,
+            tgl,
+            jam_mulai,
+            jam_selesai,
+            ket
+        },
         { where: { id: id } }
       );
 
       if (updatedRowsCount > 0) {
         res.status(200).json({
-          message: "Labs updated successfully",
+          message: "input kelas pengganti updated successfully",
         });
       } else {
         res.status(404).json({
-          status: res.status,
-          message: "Labs not found",
+          message: "kelas pengganti data not found",
         });
       }
     } catch (error) {
-      console.error(error);
+        console.error(error);
       res.status(500).json({
-        status: res.status,
         message: "Internal Server Error",
       });
     }
@@ -99,25 +142,22 @@ async function destroy(req, res) {
     try {
         const id = req.params.id;
 
-        const deletedRowsCount = await models.Laboratorium.destroy({
+        const deletedRowsCount = await models.input_KP.destroy({
             where: { id: id }
         });
 
         if (deletedRowsCount > 0) {
             res.status(200).json({
-                status: res.status,
-                message: "labs deleted successfully",
+                message: "kelas pengganti data deleted successfully",
             });
         } else {
             res.status(404).json({
-                status: res.status,
-                message: "labs not found",
+                message: "kelas pengganti data not found",
             });
         }
     } catch (error) {
         console.error(error);
         res.status(500).json({
-            status: res.status,
             message: "Internal Server Error",
         });
     }
@@ -127,20 +167,35 @@ async function show_by_id(req, res) {
     try {
         const id = req.params.id;
 
-        const result = await models.Laboratorium.findByPk(id);
+        const result = await models.input_KP.findByPk(id);
 
         if (result) {
-            const {id_software, nama, jml_PC, jenis_lab, deskripsi } = result;
+            const {
+                nm_dosen,
+                mt_kuliah,
+                kd_mk,
+                no_wa,
+                ruangan,
+                tgl,
+                jam_mulai,
+                jam_selesai,
+                ket
+            } = result;
             res.status(200).json({
-                id_software,
-                nama,
-                jml_PC,
-                jenis_lab,
-                deskripsi
+                id,
+                nm_dosen,
+                mt_kuliah,
+                kd_mk,
+                no_wa,
+                ruangan,
+                tgl,
+                jam_mulai,
+                jam_selesai,
+                ket
             });
         } else {
             res.status(404).json({
-                message: "Labs not found",
+                message: "data kelas pengganti not found",
             });
         }
     } catch (error) {

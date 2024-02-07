@@ -11,6 +11,7 @@ const pesanRoute = require('../routes/pesans')
 const kpRoute = require('../routes/kelas_pgnt')
 const keperRoute = require('../routes/keperluan')
 const peminRoute = require('../routes/peminjaman')
+const inkpRoute = require('../routes/in_k_pgnt')
 const fileRoute = require('../routes/file')
 
 const bodyParser = require('body-parser');
@@ -34,9 +35,10 @@ app.use('/sw_sekunders', swsekunderRoute);
 app.use('/days', hariRoute);
 app.use('/jadwals', jadwalRoute);
 app.use('/pesans', pesanRoute);
-app.use('/kp_pgnt', kpRoute);
+app.use('/kelas_pengganti', kpRoute);
 app.use('/keperluans', keperRoute);
 app.use('/peminjamans', peminRoute);
+app.use('/in_kelas_pengganti', inkpRoute);
 app.use('/files', fileRoute);
 
 module.exports = app;
