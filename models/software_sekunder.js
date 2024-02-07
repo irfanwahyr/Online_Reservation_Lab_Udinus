@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   Software_Sekunder.init({
     nama: DataTypes.STRING,
     versi: DataTypes.STRING,
-    lab_pakai: DataTypes.STRING,
+    id_lab: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Software_Sekunder',

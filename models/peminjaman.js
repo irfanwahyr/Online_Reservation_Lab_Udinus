@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const keperluan = require('./keperluan');
 module.exports = (sequelize, DataTypes) => {
   class Peminjaman extends Model {
     /**
@@ -11,6 +12,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Peminjaman.belongsTo(models.Users, {
+        foreignKey: 'id_user',
+        as: 'user'
+      });
+
+      Peminjaman.belongsTo(models.Laboratorium, {
+        foreignKey: 'id_lab',
+        as: 'laboratorium'
+      });
+
+      Peminjaman.belongsTo(models.Keperluan, {
+        foreignKey: 'id_keperluan',
+        as: 'keperluan'
+      });
     }
   }
   Peminjaman.init({

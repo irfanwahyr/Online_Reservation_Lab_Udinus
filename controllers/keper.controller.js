@@ -27,21 +27,18 @@ async function index(_, res) {
         });
 
         if (results && results.length > 0) {
-            const keperluan = results.map(({ id, kelas_pengganti }) => ({
+            const keperluan = results.map(({ id, nama_keperluan, kelas_pengganti }) => ({
                 id,
-                ...kelas_pengganti && {
-                    kelas_pengganti: {
-                        id_keperluan: kelas_pengganti.id_keperluan,
-                        id_jadwal: kelas_pengganti.id_jadwal,
-                        jadwal: {
-                            nama_jadwal: kelas_pengganti.jadwal.nama_jadwal,
-                            jam_mulai: kelas_pengganti.jadwal.jam_mulai,
-                            jam_selesai: kelas_pengganti.jadwal.jam_selesai,
-                            pesan: kelas_pengganti.jadwal.pesan && {
-                                status: kelas_pengganti.jadwal.pesan.status,
-                            },
-                        },
-                    },
+                nama_keperluan,
+                kelas_pengganti: {
+                    id_keperluan: kelas_pengganti.id_keperluan,
+                    id_jadwal: kelas_pengganti.id_jadwal,
+                    jadwal: {
+                        nama_jadwal: kelas_pengganti.jadwal.nama_jadwal,
+                        jam_mulai: kelas_pengganti.jadwal.jam_mulai,
+                        jam_selesai: kelas_pengganti.jadwal.jam_selesai,
+                        pesan: kelas_pengganti.jadwal.pesan
+                    }
                 },
             }));
 

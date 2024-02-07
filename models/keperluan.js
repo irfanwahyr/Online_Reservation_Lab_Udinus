@@ -13,11 +13,18 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Keperluan.hasOne(models.Kelas_Pengganti, {
         foreignKey: 'id_keperluan',
-        as: 'kelas_penggantis',
+        as: 'kelas_pengganti',
+      });
+
+      Keperluan.hasOne(models.Peminjaman, {
+        foreignKey: 'id_keperluan',
+        as: 'peminjaman'
       });
     }
   }
-  Keperluan.init({},
+  Keperluan.init({
+    nama_keperluan: DataTypes.STRING
+  },
     {
     sequelize,
     modelName: 'Keperluan',

@@ -11,13 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Jadwal.belongsTo(models.Kelas_Pengganti, {
+        foreignKey: 'id_jadwal',
+        as: 'kelas_pengganti'
+      });
     }
   }
   Jadwal.init({
+    kode_jadwal: DataTypes.STRING,
     nama_jadwal: DataTypes.STRING,
     jam_mulai: DataTypes.INTEGER,
     jam_selesai: DataTypes.INTEGER,
-    id_hari: DataTypes.INTEGER
+    id_pesan: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Jadwal',

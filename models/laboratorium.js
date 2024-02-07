@@ -12,6 +12,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id_lab',
         as: 'software_sekunders',
       });
+
+      Laboratorium.hasOne(models.Peminjaman, {
+        foreignKey: 'id_lab',
+        as: 'peminjaman'
+      });
     }
   }
   Laboratorium.init({

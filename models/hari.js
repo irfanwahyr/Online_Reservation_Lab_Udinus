@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Hari.init({
-    nama_hari: DataTypes.STRING
+    nama_hari: DataTypes.STRING,
+    id_jadwal: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Hari',

@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Pesan.init({
     status: DataTypes.INTEGER,
-    id_jadwal: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Pesan',
