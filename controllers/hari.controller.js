@@ -5,8 +5,9 @@ async function index(_, res) {
         const results = await models.Hari.findAll();
 
         if (results && results.length > 0) {
-            const haris = results.map(({ nama_hari }) => ({
+            const haris = results.map(({ nama_hari, id_jadwal }) => ({
                 nama_hari,
+                id_jadwal
             }));
 
             res.status(200).json(haris);
@@ -29,9 +30,10 @@ async function show_by_id(req, res) {
         const result = await models.Hari.findByPk(id);
 
         if (result) {
-            const { nama_hari } = result;
+            const { nama_hari, id_jadwal } = result;
             res.status(200).json({
                 nama_hari,
+                id_jadwal
             });
         } else {
             res.status(404).json({

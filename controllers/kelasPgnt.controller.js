@@ -2,12 +2,21 @@ const models = require('../models');
 
 async function index(_, res) {
     try {
-        const results = await models.Kelas_Pengganti.findAll();
+        const results = await models.Kelas_Pengganti.findAll({
+            include: [
+                {
+                    model: models.Jadwal,
+                    as: 'jadwal',
+                    attributes: ['id', 'nama_jadwal', 'jam_mulai', 'jam_selesai', 'id_pesan']
+                }
+            ]
+        });
 
         if (results && results.length > 0) {
-            const kp = results.map(({ kode_keperluan, id_jadwal }) => ({
+            const kp = results.map(({ id_keperluan, id_jadwal, jadwal }) => ({
                 kode_keperluan,
-                id_jadwal
+                id_jadwal,
+                jadwal
             }));
 
             res.status(200).json(kp);
@@ -30,9 +39,9 @@ async function show_by_id(req, res) {
         const result = await models.Kelas_Pengganti.findByPk(id);
 
         if (result) {
-            const { kode_keperluan, id_jadwal } = result;
+            const { id_keperluan, id_jadwal } = result;
             res.status(200).json({
-                kode_keperluan,
+                id_keperluan,
                 id_jadwal
             });
         } else {

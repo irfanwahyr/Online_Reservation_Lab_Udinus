@@ -12,14 +12,26 @@ module.exports = {
       id_user: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
       },
       id_lab: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Laboratoria',
+          key: 'id'
+        },
       },
       id_keperluan: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Keperluans',
+          key: 'id'
+        },
       },
       createdAt: {
         allowNull: false,

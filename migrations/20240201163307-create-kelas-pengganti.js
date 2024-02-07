@@ -11,11 +11,19 @@ module.exports = {
       },
       id_keperluan: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Keperluans',
+          key: 'id'
+        },
       },
       id_jadwal: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Jadwals',
+          key: 'id'
+        },
       },
       createdAt: {
         allowNull: false,

@@ -2,11 +2,10 @@ const models = require('../models');
 
 async function create(req, res) {
     try {
-        const { status, id_jadwal } = req.body;
+        const { status } = req.body;
 
         await models.Pesan.create({
             status: status,
-            id_jadwal: id_jadwal
         });
 
         return res.status(201).json({
@@ -24,9 +23,8 @@ async function index(_, res) {
         const results = await models.Pesan.findAll();
 
         if (results && results.length > 0) {
-            const pesans = results.map(({ status, id_jadwal }) => ({
-                status,
-                id_jadwal
+            const pesans = results.map(({ status }) => ({
+                status
             }));
 
             res.status(200).json(pesans);
@@ -45,10 +43,10 @@ async function index(_, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { status, id_jadwal } = req.body;
+      const { status } = req.body;
 
       const [updatedRowsCount] = await models.Pesan.update(
-        { status, id_jadwal },
+        { status },
         { where: { id: id } }
       );
 
@@ -63,7 +61,6 @@ async function update(req, res) {
         });
       }
     } catch (error) {
-      console.error(error);
       res.status(500).json({
         status: res.status,
         message: "Internal Server Error",
@@ -106,10 +103,9 @@ async function show_by_id(req, res) {
         const result = await models.Pesan.findByPk(id);
 
         if (result) {
-            const { status, id_jadwal } = result;
+            const { status } = result;
             res.status(200).json({
-                status,
-                id_jadwal
+                status
             });
         } else {
             res.status(404).json({

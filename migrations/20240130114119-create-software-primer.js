@@ -18,6 +18,11 @@ module.exports = {
       },
       id_lab: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Laboratoria',
+          key: 'id'
+        },
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
