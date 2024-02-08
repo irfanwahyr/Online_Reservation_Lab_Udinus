@@ -40,62 +40,6 @@ async function index(_, res) {
     }
 }
 
-async function update(req, res) {
-    try {
-      const id = req.params.id;
-      const { status } = req.body;
-
-      const [updatedRowsCount] = await models.Pesan.update(
-        { status },
-        { where: { id: id } }
-      );
-
-      if (updatedRowsCount > 0) {
-        res.status(200).json({
-          message: "pesan updated successfully",
-        });
-      } else {
-        res.status(404).json({
-          status: res.status,
-          message: "pesan not found",
-        });
-      }
-    } catch (error) {
-      res.status(500).json({
-        status: res.status,
-        message: "Internal Server Error",
-      });
-    }
-  }
-
-async function destroy(req, res) {
-    try {
-        const id = req.params.id;
-
-        const deletedRowsCount = await models.Pesan.destroy({
-            where: { id: id }
-        });
-
-        if (deletedRowsCount > 0) {
-            res.status(200).json({
-                status: res.status,
-                message: "pesan deleted successfully",
-            });
-        } else {
-            res.status(404).json({
-                status: res.status,
-                message: "pesan not found",
-            });
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            status: res.status,
-            message: "Internal Server Error",
-        });
-    }
-}
-
 async function show_by_id(req, res) {
     try {
         const id = req.params.id;
@@ -122,7 +66,5 @@ async function show_by_id(req, res) {
 module.exports = {
     create,
     index,
-    update,
-    destroy,
     show_by_id
   };

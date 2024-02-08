@@ -7,14 +7,14 @@ async function index(_, res) {
                 {
                     model: models.Jadwal,
                     as: 'jadwal',
-                    attributes: ['id', 'nama_jadwal', 'jam_mulai', 'jam_selesai', 'id_pesan']
+                    attributes: ['id', 'nama_jadwal', 'jam_mulai', 'jam_selesai']
                 }
             ]
         });
 
         if (results && results.length > 0) {
             const kp = results.map(({ id_keperluan, id_jadwal, jadwal }) => ({
-                kode_keperluan,
+                id_keperluan,
                 id_jadwal,
                 jadwal
             }));

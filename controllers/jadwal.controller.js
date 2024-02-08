@@ -2,14 +2,13 @@ const models = require('../models');
 
 async function create(req, res) {
     try {
-        const { nama_jadwal, jam_mulai, jam_selesai, id_pesan } = req.body;
+        const { nama_jadwal, jam_mulai, jam_selesai } = req.body;
 
         // Data input valid, continue with the create operation
         await models.Jadwal.create({
             nama_jadwal: nama_jadwal,
             jam_mulai: jam_mulai,
             jam_selesai: jam_selesai,
-            id_pesan: id_pesan
         });
 
         return res.status(201).json({
@@ -27,11 +26,10 @@ async function index(_, res) {
         const results = await models.Jadwal.findAll();
 
         if (results && results.length > 0) {
-            const jadwals = results.map(({ nama_jadwal, jam_mulai, jam_selesai, id_pesan }) => ({
+            const jadwals = results.map(({ nama_jadwal, jam_mulai, jam_selesai }) => ({
                 nama_jadwal,
                 jam_mulai,
                 jam_selesai,
-                id_pesan
             }));
 
             res.status(200).json(jadwals);
@@ -50,10 +48,10 @@ async function index(_, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { nama_jadwal, jam_mulai, jam_selesai, id_pesan } = req.body;
+      const { nama_jadwal, jam_mulai, jam_selesai } = req.body;
 
       const [updatedRowsCount] = await models.Jadwal.update(
-        { nama_jadwal, jam_mulai, jam_selesai, id_pesan },
+        { nama_jadwal, jam_mulai, jam_selesai },
         { where: { id: id } }
       );
 
@@ -111,12 +109,11 @@ async function show_by_id(req, res) {
         const result = await models.Jadwal.findByPk(id);
 
         if (result) {
-            const { nama_jadwal, jam_mulai, jam_selesai, id_pesan } = result;
+            const { nama_jadwal, jam_mulai, jam_selesai } = result;
             res.status(200).json({
                 nama_jadwal,
                 jam_mulai,
-                jam_selesai,
-                id_pesan
+                jam_selesai
             });
         } else {
             res.status(404).json({

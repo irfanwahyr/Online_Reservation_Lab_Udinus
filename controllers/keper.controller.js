@@ -19,11 +19,6 @@ async function index(_, res) {
                                     as: 'hari',
                                     attributes: ['id', 'nama_hari']
                                 },
-                                {
-                                    model: models.Pesan,
-                                    as: 'pesan',
-                                    attributes: [ 'id', 'status'],
-                                },
                             ],
                         },
                     ],

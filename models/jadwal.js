@@ -20,11 +20,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id_hari',
         as: 'hari'
       });
-
-      Jadwal.belongsTo(models.Pesan, {
-        foreignKey: 'id_pesan',
-        as: 'pesan'
-      });
     }
   }
   Jadwal.init({
@@ -32,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
     nama_jadwal: DataTypes.STRING,
     jam_mulai: DataTypes.INTEGER,
     jam_selesai: DataTypes.INTEGER,
-    id_pesan: DataTypes.INTEGER,
     id_hari: DataTypes.INTEGER
   }, {
     sequelize,
