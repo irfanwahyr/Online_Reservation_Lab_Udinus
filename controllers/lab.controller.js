@@ -127,16 +127,30 @@ async function show_by_id(req, res) {
     try {
         const id = req.params.id;
 
-        const result = await models.Laboratorium.findByPk(id);
+        const result = await models.Laboratorium.findByPk(id, {
+            include: [{
+                model: models.Software_Primer,
+                as: 'software_primers',
+                attributes: [ 'id', 'nama', 'versi']
+            },
+            {
+                model: models.Software_Sekunder,
+                as: 'software_sekunders',
+                attributes: [ 'id', 'nama', 'versi']
+            },
+        ]
+        });
 
         if (result) {
-            const {id_software, nama, jml_PC, jenis_lab, deskripsi } = result;
+            const {id, nama, jml_PC, jenis_lab, deskripsi, software_primers, software_sekunders} = result;
             res.status(200).json({
-                id_software,
+                id,
                 nama,
                 jml_PC,
                 jenis_lab,
-                deskripsi
+                deskripsi,
+                software_primers,
+                software_sekunders
             });
         } else {
             res.status(404).json({
