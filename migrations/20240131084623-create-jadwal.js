@@ -12,7 +12,7 @@ module.exports = {
       kelompok: {
         type: Sequelize.STRING,
       },
-      nama_jadwal: {
+      kelompok: {
         type: Sequelize.STRING
       },
       jam_mulai: {
