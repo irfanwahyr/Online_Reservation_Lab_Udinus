@@ -145,10 +145,10 @@ async function show_by_lab_hari(req, res) {
         });
 
         if (results && results.length > 0) {
-            const jadwals = results.map(({ id, kode_jadwal, nama_jadwal, jam_mulai, jam_selesai, hari }) => ({
+            const jadwals = results.map(({ id, kelompok, nama_jadwal, jam_mulai, jam_selesai, hari }) => ({
                 id,
                 hari_input,
-                kode_jadwal,
+                kelompok,
                 nama_jadwal,
                 jam_mulai,
                 jam_selesai,

@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      kode_jadwal: {
+      kelompok: {
         type: Sequelize.STRING,
       },
       nama_jadwal: {

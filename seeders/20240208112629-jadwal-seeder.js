@@ -15,7 +15,7 @@ module.exports = {
       const jam_selesai = j;
 
       daysData.push({
-        kode_jadwal: null,
+        kelompok: null,
         nama_jadwal: null,
         jam_mulai,
         jam_selesai,

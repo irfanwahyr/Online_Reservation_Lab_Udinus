@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Jadwal.init({
-    kode_jadwal: DataTypes.STRING,
+    kelompok: DataTypes.STRING,
     nama_jadwal: DataTypes.STRING,
     jam_mulai: DataTypes.INTEGER,
     jam_selesai: DataTypes.INTEGER,
