@@ -4,19 +4,44 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
 
     const currentDate = new Date();
+    const jam = [
+      "07.00",
+      "07.50",
+      "08.40",
+      "09.30",
+      "10.20",
+      "11.10",
+      "12.30",
+      "13.20",
+      "14.10",
+      "15.00",
+      "16.20",
+      "17.10",
+      "18.30",
+      "19.20",
+      "20.10",
+      "21.00"
+    ];
 
-    // Data yang akan diinsert
     const daysData = [];
     let id_hari = 1;
-    let j = 1;
+    let j = 0;
+    let jam_mulai = "";
+    let jam_selesai = "";
 
-    for (let i = 1; i <= 1170; i++) {
-      const jam_mulai = j;
-      const jam_selesai = j;
+    for (let i = 0; i < 1170; i++) {
+     if(j == 14){
+        j = -1;
+        jam_mulai = jam[14];
+        jam_selesai = jam[15];
+     } else {
+        jam_mulai = jam[j];
+        jam_selesai = jam[j+1];
+     }
 
       daysData.push({
         kelompok: null,
-        nama_jadwal: null,
+        mata_kuliah: null,
         jam_mulai,
         jam_selesai,
         id_hari,
@@ -24,13 +49,9 @@ module.exports = {
         updatedAt: currentDate,
       });
 
-      if(j === 15){
-        j = 0;
-      }
       j++;
 
-
-      if (i % 15 === 0) {
+      if (i % 14 === 0) {
         id_hari = (id_hari % 6) + 1;
       }
     }
@@ -39,7 +60,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    // Hapus semua data dari tabel 'jadwals'
     return queryInterface.bulkDelete('jadwals', null, {});
   }
 };

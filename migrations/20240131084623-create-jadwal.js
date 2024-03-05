@@ -12,16 +12,16 @@ module.exports = {
       kelompok: {
         type: Sequelize.STRING,
       },
-      kelompok: {
+      mata_kuliah: {
         type: Sequelize.STRING
       },
       jam_mulai: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       jam_selesai: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       id_hari: {
         allowNull: false,

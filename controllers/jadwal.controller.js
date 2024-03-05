@@ -2,11 +2,12 @@ const models = require('../models');
 
 async function create(req, res) {
     try {
-        const { nama_jadwal, jam_mulai, jam_selesai } = req.body;
+        const { kelompok, mata_kuliah, jam_mulai, jam_selesai } = req.body;
 
         // Data input valid, continue with the create operation
         await models.Jadwal.create({
-            nama_jadwal: nama_jadwal,
+            kelompok: kelompok,
+            mata_kuliah: mata_kuliah,
             jam_mulai: jam_mulai,
             jam_selesai: jam_selesai,
         });
@@ -24,10 +25,10 @@ async function create(req, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { nama_jadwal, jam_mulai, jam_selesai } = req.body;
+      const { kelompok, mata_kuliah, jam_mulai, jam_selesai } = req.body;
 
       const [updatedRowsCount] = await models.Jadwal.update(
-        { nama_jadwal, jam_mulai, jam_selesai },
+        { kelompok, mata_kuliah, jam_mulai, jam_selesai },
         { where: { id: id } }
       );
 
@@ -116,7 +117,7 @@ function getLabRange(lab) {
 async function show_by_lab_hari(req, res) {
     try {
         const lab = req.params.lab;
-        const hari_input = req.params.hari;
+        const id_hari = req.params.hari;
         const itemsPerPage = 90;
         let labRanges;
 
@@ -138,24 +139,23 @@ async function show_by_lab_hari(req, res) {
                         labRanges.labEndRange
                     ],
                 },
-                id_hari: hari_input,
+                id_hari: id_hari,
             },
             limit: itemsPerPage,
             offset: 0,
         });
 
         if (results && results.length > 0) {
-            const jadwals = results.map(({ id, kelompok, nama_jadwal, jam_mulai, jam_selesai, hari }) => ({
+            const jadwal = results.map(({ id, id_hari, kelompok, mata_kuliah, jam_mulai, jam_selesai }) => ({
                 id,
-                hari_input,
+                id_hari,
                 kelompok,
-                nama_jadwal,
+                mata_kuliah,
                 jam_mulai,
                 jam_selesai,
-                hari,
             }));
 
-            res.status(200).json(jadwals);
+            res.status(200).json(jadwal);
         } else {
             res.status(200).json({
                 message: "No jadwal found",

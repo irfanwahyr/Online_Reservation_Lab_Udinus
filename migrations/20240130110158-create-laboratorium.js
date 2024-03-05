@@ -9,12 +9,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nama: {
+      nama_lab: {
         allowNull: false,
-        type: Sequelize.CHAR,
+        type: Sequelize.STRING,
         unique: true
       },
-      jml_PC: {
+      jumlah_pc: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      deskripsi: {
+      deskripsi_lab: {
         allowNull: false,
         type: Sequelize.STRING
       },

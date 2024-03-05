@@ -24,9 +24,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Jadwal.init({
     kelompok: DataTypes.STRING,
-    nama_jadwal: DataTypes.STRING,
-    jam_mulai: DataTypes.INTEGER,
-    jam_selesai: DataTypes.INTEGER,
+    mata_kuliah: DataTypes.STRING,
+    jam_mulai: DataTypes.STRING,
+    jam_selesai: DataTypes.STRING,
     id_hari: DataTypes.INTEGER
   }, {
     sequelize,

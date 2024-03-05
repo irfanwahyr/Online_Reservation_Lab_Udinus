@@ -6,22 +6,17 @@ module.exports = {
 
     const pesanData = [
       {
-        status: 1,
+        status: "Reservasi",
         createdAt: currentDate,
         updatedAt: currentDate,
       },
       {
-        status: 2,
+        status: "Batalkan",
         createdAt: currentDate,
         updatedAt: currentDate,
       },
       {
-        status: 3,
-        createdAt: currentDate,
-        updatedAt: currentDate,
-      },
-      {
-        status: 4,
+        status: "Diproses",
         createdAt: currentDate,
         updatedAt: currentDate,
       },

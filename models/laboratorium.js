@@ -3,14 +3,14 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Laboratorium extends Model {
     static associate(models) {
-      Laboratorium.hasMany(models.Software_Primer, {
+      Laboratorium.hasMany(models.Software, {
         foreignKey: 'id_lab',
-        as: 'software_primers',
+        as: 'software',
       });
 
-      Laboratorium.hasMany(models.Software_Sekunder, {
+      Laboratorium.hasMany(models.Hardware, {
         foreignKey: 'id_lab',
-        as: 'software_sekunders',
+        as: 'hardware',
       });
 
       Laboratorium.hasOne(models.Peminjaman, {
@@ -20,10 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Laboratorium.init({
-    nama: DataTypes.STRING,
-    jml_PC: DataTypes.INTEGER,
+    nama_lab: DataTypes.STRING,
+    jumlah_pc: DataTypes.INTEGER,
     jenis_lab: DataTypes.STRING,
-    deskripsi: DataTypes.STRING
+    deskripsi_lab: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Laboratorium',

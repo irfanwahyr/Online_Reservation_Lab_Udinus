@@ -3,15 +3,13 @@ const { Sequelize } = require('sequelize');
 
 async function create(req, res) {
     try {
-        const { id_software ,nama, jml_PC, jenis_lab, deskripsi } = req.body;
+        const { nama_lab, jumlah_pc, jenis_lab, deskripsi_lab } = req.body;
 
-        // Data input valid, continue with the create operation
         await models.Laboratorium.create({
-            id_software: id_software,
-            nama: nama,
-            jml_PC: jml_PC,
+            nama_lab: nama_lab,
+            jumlah_pc: jumlah_pc,
             jenis_lab: jenis_lab,
-            deskripsi: deskripsi
+            deskripsi_lab: deskripsi_lab
         });
 
         return res.status(201).json({
@@ -28,27 +26,27 @@ async function index(_, res) {
     try {
         const results = await models.Laboratorium.findAll({
             include: [{
-                model: models.Software_Primer,
-                as: 'software_primers',
-                attributes: [ 'id', 'nama', 'versi']
+                model: models.Software,
+                as: 'software',
+                attributes: [ 'id', 'nama_software', 'versi']
             },
             {
-                model: models.Software_Sekunder,
-                as: 'software_sekunders',
-                attributes: [ 'id', 'nama', 'versi']
+                model: models.Hardware,
+                as: 'hardware',
+                attributes: [ 'id', 'processor', 'ram', 'cpu', 'monitor', 'keyboard', 'mouse', 'storage']
             },
         ]
         });
 
         if (results && results.length > 0) {
-            const labsData = results.map(({ id, nama, jml_PC, jenis_lab, deskripsi, software_primers ,software_sekunders }) => ({
+            const labsData = results.map(({ id, nama_lab, jumlah_pc, jenis_lab, deskripsi_lab, software , hardware }) => ({
                 id,
-                nama,
-                jml_PC,
+                nama_lab,
+                jumlah_pc,
                 jenis_lab,
-                deskripsi,
-                software_primers,
-                software_sekunders,
+                deskripsi_lab,
+                software,
+                hardware,
             }));
 
             res.status(200).json(labsData);
@@ -69,10 +67,10 @@ async function index(_, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { id_software, nama, jml_PC, jenis_lab, deskripsi } = req.body;
+      const { nama_lab, jumlah_pc, jenis_lab, deskripsi_lab } = req.body;
 
       const [updatedRowsCount] = await models.Laboratorium.update(
-        { id_software ,nama, jml_PC, jenis_lab, deskripsi },
+        { nama_lab, jumlah_pc, jenis_lab, deskripsi_lab },
         { where: { id: id } }
       );
 
@@ -129,28 +127,28 @@ async function show_by_id(req, res) {
 
         const result = await models.Laboratorium.findByPk(id, {
             include: [{
-                model: models.Software_Primer,
-                as: 'software_primers',
-                attributes: [ 'id', 'nama', 'versi']
+                model: models.Software,
+                as: 'software',
+                attributes: [ 'id', 'nama_software', 'versi']
             },
             {
-                model: models.Software_Sekunder,
+                model: models.Hardware,
                 as: 'software_sekunders',
-                attributes: [ 'id', 'nama', 'versi']
+                attributes: [ 'id', 'processor', 'ram', 'gpu', 'monitor', 'keyboard', 'mouse', 'storage']
             },
         ]
         });
 
         if (result) {
-            const {id, nama, jml_PC, jenis_lab, deskripsi, software_primers, software_sekunders} = result;
+            const {id, nama_lab, jumlah_pc, jenis_lab, deskripsi_lab, software, hardware} = result;
             res.status(200).json({
                 id,
-                nama,
-                jml_PC,
+                nama_lab,
+                jumlah_pc,
                 jenis_lab,
-                deskripsi,
-                software_primers,
-                software_sekunders
+                deskripsi_lab,
+                software,
+                hardware
             });
         } else {
             res.status(404).json({

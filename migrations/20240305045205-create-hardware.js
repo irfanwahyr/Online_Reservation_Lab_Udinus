@@ -2,57 +2,38 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('input_ACR_KMPs', {
+    await queryInterface.createTable('hardware', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fakultas: {
+      processor: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      pn_jwb: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      no_wa: {
+      ram: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      nm_acara: {
+      gpu: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      ruangan: {
-        allowNull: false,
-        type: Sequelize.CHAR
-      },
-      tgl_mulai: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      tgl_selesai: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      jam_mulai: {
+      monitor: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      jam_selesai: {
+      keyboard: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      ket: {
-        type: Sequelize.STRING
-      },
-      nm_propo: {
+      mouse: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
-      nm_srt_tmbsn: {
+      storage: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -67,6 +48,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('input_ACR_KMPs');
+    await queryInterface.dropTable('hardware');
   }
 };

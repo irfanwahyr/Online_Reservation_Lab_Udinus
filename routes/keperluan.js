@@ -1,5 +1,5 @@
 const express = require('express');
-const keperController = require('../controllers/keper.controller');
+const keperController = require('../controllers/keperluan.controller');
 const router = express.Router();
 
 router.get('/', keperController.index);

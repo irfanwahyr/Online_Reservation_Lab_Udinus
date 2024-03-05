@@ -2,17 +2,16 @@ const models = require('../models');
 
 async function create(req, res) {
     try {
-        const { nama, versi, lab_pakai } = req.body;
+        const { nama_software, versi, id_lab } = req.body;
 
-        // Data input valid, continue with the create operation
-        await models.Software_Primer.create({
-            nama: nama,
+        await models.Software.create({
+            nama_software: nama_software,
             versi: versi,
-            lab_pakai: lab_pakai,
+            id_lab: id_lab,
         });
 
         return res.status(201).json({
-            message: "Created new Data Software Primer"
+            message: "Created new Data Software"
           });
     } catch (error) {
         return res.status(500).json({
@@ -23,24 +22,24 @@ async function create(req, res) {
 
 async function index(_, res) {
     try {
-        const results = await models.Software_Primer.findAll();
+        const results = await models.Software.findAll();
 
         if (results && results.length > 0) {
-            const sw_primer = results.map(({ nama, versi, lab_pakai }) => ({
-                nama,
+            const software = results.map(({ nama_software, versi, id_lab }) => ({
+                nama_software,
                 versi,
-                lab_pakai
+                id_lab
             }));
 
-            res.status(200).json(sw_primer);
+            res.status(200).json(software);
         } else {
             res.status(200).json({
-                message: "No Software_primer found",
+                message: "No Software found",
             });
         }
     } catch (error) {
         res.status(500).json({
-            message: "Unable to retrieve software_primer data. Something went wrong.",
+            message: "Unable to retrieve software data. Something went wrong.",
         });
     }
 }
@@ -48,21 +47,21 @@ async function index(_, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { nama, versi, lab_pakai } = req.body;
+      const { nama_software, versi, id_lab } = req.body;
 
-      const [updatedRowsCount] = await models.Software_Primer.update(
-        { nama, versi, lab_pakai },
+      const [updatedRowsCount] = await models.Software.update(
+        { nama_software, versi, id_lab },
         { where: { id: id } }
       );
 
       if (updatedRowsCount > 0) {
         res.status(200).json({
-          message: "Software_primer updated successfully",
+          message: "Software updated successfully",
         });
       } else {
         res.status(404).json({
           status: res.status,
-          message: "Software_primer not found",
+          message: "Software not found",
         });
       }
     } catch (error) {
@@ -78,19 +77,19 @@ async function destroy(req, res) {
     try {
         const id = req.params.id;
 
-        const deletedRowsCount = await models.Software_Primer.destroy({
+        const deletedRowsCount = await models.Software.destroy({
             where: { id: id }
         });
 
         if (deletedRowsCount > 0) {
             res.status(200).json({
                 status: res.status,
-                message: "Software_primer deleted successfully",
+                message: "Software deleted successfully",
             });
         } else {
             res.status(404).json({
                 status: res.status,
-                message: "Software_primer not found",
+                message: "Software not found",
             });
         }
     } catch (error) {
@@ -106,23 +105,23 @@ async function show_by_id(req, res) {
     try {
         const id = req.params.id;
 
-        const result = await models.Software_Primer.findByPk(id);
+        const result = await models.Software.findByPk(id);
 
         if (result) {
-            const { nama, versi, lab_pakai } = result;
+            const { nama_software, versi, id_lab } = result;
             res.status(200).json({
-                nama,
+                nama_software,
                 versi,
-                lab_pakai
+                id_lab
             });
         } else {
             res.status(404).json({
-                message: "software_primer not found",
+                message: "software not found",
             });
         }
     } catch (error) {
         res.status(500).json({
-            message: "software_primer Error",
+            message: "software Error",
         });
     }
 }

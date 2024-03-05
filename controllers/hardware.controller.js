@@ -2,17 +2,20 @@ const models = require('../models');
 
 async function create(req, res) {
     try {
-        const { nama, versi, lab_pakai } = req.body;
+        const { processor, ram, gpu, monitor, keyboard, mouse, storage } = req.body;
 
-        // Data input valid, continue with the create operation
-        await models.Software_Sekunder.create({
-            nama: nama,
-            versi: versi,
-            lab_pakai: lab_pakai,
+        await models.Hardware.create({
+            processor: processor,
+            ram: ram,
+            gpu: gpu,
+            monitor: monitor,
+            keyboard: keyboard,
+            mouse: mouse,
+            storage: storage
         });
 
         return res.status(201).json({
-            message: "Created new Data Software Sekunder"
+            message: "Created new Data Hardware"
           });
     } catch (error) {
         return res.status(500).json({
@@ -23,24 +26,28 @@ async function create(req, res) {
 
 async function index(_, res) {
     try {
-        const results = await models.Software_Sekunder.findAll();
+        const results = await models.Hardware.findAll();
 
         if (results && results.length > 0) {
-            const sw_primer = results.map(({ nama, versi, lab_pakai }) => ({
-                nama,
-                versi,
-                lab_pakai
+            const hardware = results.map(({ processor, ram, gpu, monitor, keyboard, mouse, storage }) => ({
+                processor,
+                ram,
+                gpu,
+                monitor,
+                keyboard,
+                mouse,
+                storage
             }));
 
-            res.status(200).json(sw_primer);
+            res.status(200).json(hardware);
         } else {
             res.status(200).json({
-                message: "No Software_sekunder found",
+                message: "No Hardware found",
             });
         }
     } catch (error) {
         res.status(500).json({
-            message: "Unable to retrieve software_sekunder data. Something went wrong.",
+            message: "Unable to retrieve Hardware data. Something went wrong.",
         });
     }
 }
@@ -48,21 +55,21 @@ async function index(_, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { nama, versi, lab_pakai } = req.body;
+      const { processor, ram, gpu, monitor, keyboard, mouse, storage } = req.body;
 
-      const [updatedRowsCount] = await models.Software_Sekunder.update(
-        { nama, versi, lab_pakai },
+      const [updatedRowsCount] = await models.Hardware.update(
+        { processor, ram, gpu, monitor, keyboard, mouse, storage },
         { where: { id: id } }
       );
 
       if (updatedRowsCount > 0) {
         res.status(200).json({
-          message: "Software_sekunder updated successfully",
+          message: "Hardware updated successfully",
         });
       } else {
         res.status(404).json({
           status: res.status,
-          message: "Software_primer not found",
+          message: "Hardware not found",
         });
       }
     } catch (error) {
@@ -78,19 +85,19 @@ async function destroy(req, res) {
     try {
         const id = req.params.id;
 
-        const deletedRowsCount = await models.Software_Sekunder.destroy({
+        const deletedRowsCount = await models.Hardware.destroy({
             where: { id: id }
         });
 
         if (deletedRowsCount > 0) {
             res.status(200).json({
                 status: res.status,
-                message: "Software_sekunder deleted successfully",
+                message: "Hardware deleted successfully",
             });
         } else {
             res.status(404).json({
                 status: res.status,
-                message: "Software_sekunder not found",
+                message: "Hardware not found",
             });
         }
     } catch (error) {
@@ -106,23 +113,27 @@ async function show_by_id(req, res) {
     try {
         const id = req.params.id;
 
-        const result = await models.Software_Sekunder.findByPk(id);
+        const result = await models.Hardware.findByPk(id);
 
         if (result) {
-            const { nama, versi, lab_pakai } = result;
+            const { processor, ram, gpu, monitor, keyboard, mouse, storage } = result;
             res.status(200).json({
-                nama,
-                versi,
-                lab_pakai
+                processor,
+                ram,
+                gpu,
+                monitor,
+                keyboard,
+                mouse,
+                storage
             });
         } else {
             res.status(404).json({
-                message: "software_sekunder not found",
+                message: "software not found",
             });
         }
     } catch (error) {
         res.status(500).json({
-            message: "software_primer Error",
+            message: "software Error",
         });
     }
 }

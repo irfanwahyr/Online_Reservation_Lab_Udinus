@@ -12,7 +12,7 @@ async function index(_, res) {
                         {
                             model: models.Jadwal,
                             as: 'jadwal',
-                            attributes: [ 'id', 'nama_jadwal', 'jam_mulai', 'jam_selesai'],
+                            attributes: [ 'id', 'mata_kuliah', 'jam_mulai', 'jam_selesai'],
                             include: [
                                 {
                                     model: models.Hari,

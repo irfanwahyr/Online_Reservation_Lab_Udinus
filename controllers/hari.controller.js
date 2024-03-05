@@ -7,10 +7,9 @@ async function show_by_id(req, res) {
         const result = await models.Hari.findByPk(id);
 
         if (result) {
-            const { nama_hari, id_jadwal } = result;
+            const { nama_hari } = result;
             res.status(200).json({
-                nama_hari,
-                id_jadwal
+                nama_hari
             });
         } else {
             res.status(404).json({
