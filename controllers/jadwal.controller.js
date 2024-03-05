@@ -1,4 +1,5 @@
 const models = require('../models');
+const jadwal = require('../models/jadwal');
 
 async function create(req, res) {
     try {
@@ -146,13 +147,13 @@ async function show_by_lab_hari(req, res) {
         });
 
         if (results && results.length > 0) {
-            const jadwal = results.map(({ id, id_hari, kelompok, mata_kuliah, jam_mulai, jam_selesai }) => ({
+            const jadwal = results.map(({ id, kelompok, mata_kuliah, jam_mulai, jam_selesai, id_hari }) => ({
                 id,
-                id_hari,
                 kelompok,
                 mata_kuliah,
                 jam_mulai,
                 jam_selesai,
+                id_hari,
             }));
 
             res.status(200).json(jadwal);
