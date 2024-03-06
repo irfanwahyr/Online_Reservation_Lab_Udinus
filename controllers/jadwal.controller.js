@@ -55,55 +55,55 @@ function getLabRange(lab) {
     let labStartRange, labEndRange;
 
     switch (lab) {
-        case '1':
+        case 'A':
             labStartRange = 1;
             labEndRange = 90;
             break;
-        case '2':
+        case 'B':
             labStartRange = 91;
             labEndRange = 180;
             break;
-        case '3':
+        case 'C':
             labStartRange = 181;
             labEndRange = 270;
             break;
-        case '4':
+        case 'D':
             labStartRange = 271;
             labEndRange = 360;
             break;
-        case '5':
+        case 'E':
             labStartRange = 361;
             labEndRange = 450;
             break;
-        case '7':
+        case 'G':
             labStartRange = 451;
             labEndRange = 540;
             break;
-        case '8':
+        case 'H':
             labStartRange = 541;
             labEndRange = 630;
             break;
-        case '9':
+        case 'I':
             labStartRange = 631;
             labEndRange = 720;
             break;
-        case '10':
+        case 'J':
             labStartRange = 721;
             labEndRange = 810;
             break;
-        case '11':
+        case 'K':
             labStartRange = 811;
             labEndRange = 900;
             break;
-        case '12':
+        case 'L':
             labStartRange = 901;
             labEndRange = 990;
             break;
-        case '13':
+        case 'M':
             labStartRange = 991;
             labEndRange = 1080;
             break;
-        case '14':
+        case 'N':
             labStartRange = 1081;
             labEndRange = 1170;
             break;
@@ -139,11 +139,13 @@ async function show_by_lab_hari(req, res) {
                         labRanges.labEndRange
                     ],
                 },
-                id_hari: id_hari,
+                id_hari: id_hari
             },
             limit: itemsPerPage,
             offset: 0,
         });
+        
+        console.log(labRanges.labEndRange);
 
         if (results && results.length > 0) {
             const jadwal = results.map(({ id, id_hari, kelompok, mata_kuliah, jam_mulai, jam_selesai }) => ({
