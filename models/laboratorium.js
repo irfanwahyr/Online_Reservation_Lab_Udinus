@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     nama_lab: DataTypes.STRING,
     jumlah_pc: DataTypes.INTEGER,
     jenis_lab: DataTypes.STRING,
-    deskripsi_lab: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Laboratorium',

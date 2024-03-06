@@ -39,7 +39,6 @@ module.exports = {
         nama_lab: nama_lab[i],
         jumlah_pc: jumlah_pc[i],
         jenis_lab: jenis_lab[i],
-        deskripsi_lab: "",
         createdAt: currentDate,
         updatedAt: currentDate,
       })

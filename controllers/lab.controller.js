@@ -3,13 +3,12 @@ const { Sequelize } = require('sequelize');
 
 async function create(req, res) {
     try {
-        const { nama_lab, jumlah_pc, jenis_lab, deskripsi_lab } = req.body;
+        const { nama_lab, jumlah_pc, jenis_lab } = req.body;
 
         await models.Laboratorium.create({
             nama_lab: nama_lab,
             jumlah_pc: jumlah_pc,
             jenis_lab: jenis_lab,
-            deskripsi_lab: deskripsi_lab
         });
 
         return res.status(201).json({
@@ -39,12 +38,11 @@ async function index(_, res) {
         });
 
         if (results && results.length > 0) {
-            const labsData = results.map(({ id, nama_lab, jumlah_pc, jenis_lab, deskripsi_lab, software , hardware }) => ({
+            const labsData = results.map(({ id, nama_lab, jumlah_pc, jenis_lab, software , hardware }) => ({
                 id,
                 nama_lab,
                 jumlah_pc,
                 jenis_lab,
-                deskripsi_lab,
                 software,
                 hardware,
             }));
@@ -67,10 +65,10 @@ async function index(_, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { nama_lab, jumlah_pc, jenis_lab, deskripsi_lab } = req.body;
+      const { nama_lab, jumlah_pc, jenis_lab } = req.body;
 
       const [updatedRowsCount] = await models.Laboratorium.update(
-        { nama_lab, jumlah_pc, jenis_lab, deskripsi_lab },
+        { nama_lab, jumlah_pc, jenis_lab },
         { where: { id: id } }
       );
 
@@ -140,13 +138,12 @@ async function show_by_id(req, res) {
         });
 
         if (result) {
-            const {id, nama_lab, jumlah_pc, jenis_lab, deskripsi_lab, software, hardware} = result;
+            const {id, nama_lab, jumlah_pc, jenis_lab, software, hardware} = result;
             res.status(200).json({
                 id,
                 nama_lab,
                 jumlah_pc,
                 jenis_lab,
-                deskripsi_lab,
                 software,
                 hardware
             });
