@@ -120,6 +120,7 @@ async function show_by_id(req, res) {
             });
         }
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             message: "software Error",
         });

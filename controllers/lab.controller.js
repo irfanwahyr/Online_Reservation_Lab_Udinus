@@ -30,9 +30,9 @@ async function index(_, res) {
                 attributes: [ 'id', 'nama_software', 'versi']
             },
             {
-                model: models.Hardware,
+                model: models.hardware,
                 as: 'hardware',
-                attributes: [ 'id', 'processor', 'ram', 'cpu', 'monitor', 'keyboard', 'mouse', 'storage']
+                attributes: [ 'id', 'processor', 'ram', 'gpu', 'monitor', 'storage']
             },
         ]
         });
@@ -124,15 +124,16 @@ async function show_by_id(req, res) {
         const id = req.params.id;
 
         const result = await models.Laboratorium.findByPk(id, {
-            include: [{
+            include: [
+            {
                 model: models.Software,
                 as: 'software',
                 attributes: [ 'id', 'nama_software', 'versi']
             },
             {
-                model: models.Hardware,
-                as: 'software_sekunders',
-                attributes: [ 'id', 'processor', 'ram', 'gpu', 'monitor', 'keyboard', 'mouse', 'storage']
+                model: models.hardware,
+                as: 'hardware',
+                attributes: [ 'id', 'processor', 'ram', 'gpu', 'monitor', 'storage']
             },
         ]
         });
@@ -153,6 +154,7 @@ async function show_by_id(req, res) {
             });
         }
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             message: "Internal Server Error",
         });

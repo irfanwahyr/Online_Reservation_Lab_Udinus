@@ -10,32 +10,26 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       processor: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       ram: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       gpu: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       monitor: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      keyboard: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      mouse: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       storage: {
-        allowNull: false,
         type: Sequelize.STRING
+      },
+      id_lab: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Laboratoria',
+          key: 'id'
+        },
       },
       createdAt: {
         allowNull: false,

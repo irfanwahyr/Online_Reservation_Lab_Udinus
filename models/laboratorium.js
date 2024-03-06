@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'software',
       });
 
-      Laboratorium.hasMany(models.Hardware, {
+      Laboratorium.hasMany(models.hardware, {
         foreignKey: 'id_lab',
         as: 'hardware',
       });
