@@ -51,8 +51,12 @@ module.exports = {
 
       j++;
 
-      if (i % 14 === 0) {
-        id_hari = (id_hari % 6) + 1;
+      if (j % 15 == 0) {
+        if (id_hari % 6 == 0) {
+          id_hari = 1;
+        } else {
+          id_hari++;
+        }
       }
     }
 
