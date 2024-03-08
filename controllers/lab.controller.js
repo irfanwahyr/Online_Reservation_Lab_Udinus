@@ -1,5 +1,4 @@
 const models = require('../models');
-const { Sequelize } = require('sequelize');
 
 async function create(req, res) {
     try {
