@@ -96,6 +96,7 @@ const signIn = async (req, res) => {
         return res.status(200).json({
           message: "Authentication success",
           token: token,
+          role: user.role
         });
       } else {
         return res.status(401).json({
