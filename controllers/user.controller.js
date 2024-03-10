@@ -88,8 +88,22 @@ const signIn = async (req, res) => {
             email: user.email,
             userId: user.id,
           },
-          process.env.JWT_KEY
+          process.env.JWT_KEY,
+          {expiresIn: '1h'}
         );
+
+        // duration timeout
+        const responseTimeOut = 60 * 60 * 1000;
+        setTimeout(() => {
+          return res.status(200).json({
+            message: "Authentication success",
+            token: null, // Send null token after timeout
+            id: user.id,
+            email: user.email,
+            username: user.username,
+            role: user.role,
+          });
+        }, responseTimeOut);
 
         return res.status(200).json({
           message: "Authentication success",
