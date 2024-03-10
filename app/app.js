@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cache = require('express-cache-headers');
 
 const userRoute = require('../routes/users');
 const labRoute = require('../routes/labs');
@@ -26,15 +27,15 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
 
-app.use('/users', userRoute);
-app.use('/labs', labRoute);
-app.use('/software', softwareRoute);
-app.use('/hardware', hardwareRoute);
-app.use('/days', hariRoute);
-app.use('/jadwals', jadwalRoute);
-app.use('/pesans', pesanRoute);
-app.use('/keperluans', keperRoute);
-app.use('/peminjamans', peminRoute);
-app.use('/files', fileRoute);
+app.use('/users', cache(3600), userRoute);
+app.use('/labs',cache(3600), labRoute);
+app.use('/software', cache(3600), softwareRoute);
+app.use('/hardware', cache(3600), hardwareRoute);
+app.use('/days', cache(3600), hariRoute);
+app.use('/jadwals', cache(3600), jadwalRoute);
+app.use('/pesans', cache(3600), pesanRoute);
+app.use('/keperluans', cache(3600), keperRoute);
+app.use('/peminjamans', cache(3600), peminRoute);
+app.use('/files', cache(3600), fileRoute);
 
 module.exports = app;
