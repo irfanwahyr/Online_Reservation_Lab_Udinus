@@ -15,7 +15,6 @@ async function isEmailUnique(email) {
 
     return result === null;
   } catch (error) {
-    console.error(error);
     throw new Error("Error checking email uniqueness");
   }
 }
@@ -29,10 +28,9 @@ const signUp = async (req, res) => {
 
     if (!isUnique) {
       return res.status(409).json({
-        message: "Email must be unique",
+        message: "email must be unique",
       });
     }
-    // komentar
     // Hash the password
     const hashedPassword = await hashPass(password);
 
@@ -79,7 +77,7 @@ const signIn = async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        message: "User not found or email is incorrect",
+        message: "Email is incorrect",
       });
     }
 
