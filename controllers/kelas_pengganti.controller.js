@@ -11,19 +11,23 @@ async function create(req, res) {
             tanggal_mulai,
             jam_mulai,
             jam_selesai,
-            keterangan
+            keterangan,
+            datetime,
+            id_user,
         } = req.body;
 
         await models.Data_Kelas_Pengganti.create({
             nama_dosen: nama_dosen,
             mata_kuliah: mata_kuliah,
             kelompok: kelompok,
-            no_whatsapp: kelompok,
+            no_whatsapp: no_whatsapp,
             nama_lab: nama_lab,
             tanggal_mulai: tanggal_mulai,
             jam_mulai: jam_mulai,
             jam_selesai: jam_selesai,
-            keterangan: keterangan
+            keterangan: keterangan,
+            datetime: datetime,
+            id_user: id_user
         });
 
         return res.status(201).json({
