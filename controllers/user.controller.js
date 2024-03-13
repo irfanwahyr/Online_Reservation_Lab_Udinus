@@ -158,10 +158,11 @@ async function index(_, res) {
     const results = await models.Users.findAll();
 
     if (results && results.length > 0) {
-      const usersData = results.map(({ id, username, email }) => ({
+      const usersData = results.map(({ id, username, email, role }) => ({
         id,
         username,
         email,
+        role
       }));
 
       res.status(200).json(usersData);

@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Jadwal.hasOne(models.Kelas_Pengganti, {
-        foreignKey: 'id_jadwal',
-        as: 'kelas_pengganti'
-      });
+      // Jadwal.hasOne(models.Kelas_Pengganti, {
+      //   foreignKey: 'id_jadwal',
+      //   as: 'kelas_pengganti'
+      // });
 
       Jadwal.belongsTo(models.Hari, {
         foreignKey: 'id_hari',
