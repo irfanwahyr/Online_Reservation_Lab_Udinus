@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     jam_mulai: DataTypes.STRING,
     jam_selesai: DataTypes.STRING,
     keterangan: DataTypes.STRING,
-    datetime: DataTypes.DATE,
     id_user: DataTypes.INTEGER
   }, {
     sequelize,

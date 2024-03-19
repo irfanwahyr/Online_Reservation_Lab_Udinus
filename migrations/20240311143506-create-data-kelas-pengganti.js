@@ -44,10 +44,6 @@ module.exports = {
       keterangan: {
         type: Sequelize.STRING
       },
-      datetime: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
       id_user: {
         allowNull: false,
         type: Sequelize.INTEGER,
