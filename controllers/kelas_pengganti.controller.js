@@ -12,7 +12,6 @@ async function create(req, res) {
             jam_mulai,
             jam_selesai,
             keterangan,
-            datetime,
             id_user,
         } = req.body;
 
@@ -26,7 +25,6 @@ async function create(req, res) {
             jam_mulai: jam_mulai,
             jam_selesai: jam_selesai,
             keterangan: keterangan,
-            datetime: datetime,
             id_user: id_user
         });
 

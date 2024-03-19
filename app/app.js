@@ -12,6 +12,7 @@ const pesanRoute = require('../routes/pesans')
 const keperRoute = require('../routes/keperluan')
 const peminRoute = require('../routes/peminjaman')
 const fileRoute = require('../routes/file')
+const kelasPengganti = require('../routes/kelaspengganti')
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -37,5 +38,6 @@ app.use('/pesans', cache(3600), pesanRoute);
 app.use('/keperluans', cache(3600), keperRoute);
 app.use('/peminjamans', cache(3600), peminRoute);
 app.use('/files', cache(3600), fileRoute);
+app.use('/kelasPengganti', cache(3600), kelasPengganti);
 
 module.exports = app;
