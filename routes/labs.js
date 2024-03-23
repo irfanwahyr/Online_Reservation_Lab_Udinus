@@ -10,5 +10,4 @@ router.post('/create', checkMiddleware.checkAuth, labController.create);
 router.post('/update/:id', checkMiddleware.checkAuth, labController.update);
 router.post('/delete/:id', checkMiddleware.checkAuth, labController.destroy);
 
-
 module.exports = router;
