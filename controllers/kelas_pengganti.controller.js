@@ -38,6 +38,97 @@ async function create(req, res) {
     }
 }
 
+async function index(_, res) {
+    try {
+        const results = await models.Data_Kelas_Pengganti.findAll();
+
+        if (results && results.length > 0) {
+            const hardware = results.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan }) => ({
+                id,
+                nama_dosen,
+                mata_kuliah,
+                kelompok,
+                no_whatsapp,
+                nama_lab,
+                tanggal_mulai,
+                jam_mulai,
+                jam_selesai,
+                keterangan
+            }));
+
+            res.status(200).json(hardware);
+        } else {
+            res.status(200).json({
+                message: "No Data Kelas Pengganti found",
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: "Unable to retrieve Kelas Pengganti data. Something went wrong.",
+        });
+    }
+}
+
+async function update(req, res) {
+    try {
+      const id = req.params.id;
+      const { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan } = req.body;
+
+      const [updatedRowsCount] = await models.Data_Kelas_Pengganti.update(
+        { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan },
+        { where: { id: id } }
+      );
+
+      if (updatedRowsCount > 0) {
+        res.status(200).json({
+          message: "Data Kelas Pengganti updated successfully",
+        });
+      } else {
+        res.status(404).json({
+          status: res.status,
+          message: "Data Kelas Pengganti not found",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        status: res.status,
+        message: "Internal Server Error",
+      });
+    }
+  }
+
+async function destroy(req, res) {
+    try {
+        const id = req.params.id;
+
+        const deletedRowsCount = await models.Data_Kelas_Pengganti.destroy({
+            where: { id: id }
+        });
+
+        if (deletedRowsCount > 0) {
+            res.status(200).json({
+                status: res.status,
+                message: "Data Kelas Pengganti deleted successfully",
+            });
+        } else {
+            res.status(404).json({
+                status: res.status,
+                message: "Data Kelas Pengganti not found",
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            status: res.status,
+            message: "Internal Server Error",
+        });
+    }
+}
+
 module.exports = {
-    create
+    create,
+    index,
+    update,
+    destroy
 }

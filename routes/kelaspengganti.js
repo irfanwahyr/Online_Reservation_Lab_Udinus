@@ -7,6 +7,8 @@ const checkMiddleware = require('../middleware/check_auth');
 // router.get('/:id', kelasPenggantiController.show_by_id);
 
 router.post('/create', checkMiddleware.checkAuth, kelasPenggantiController.create);
-
+router.get('/', kelasPenggantiController.index);
+router.post('/update/:id', checkMiddleware.checkAuth, kelasPenggantiController.update);
+router.post('/delete/:id', checkMiddleware.checkAuth, kelasPenggantiController.destroy);
 
 module.exports = router;
