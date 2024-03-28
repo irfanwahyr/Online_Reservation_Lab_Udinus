@@ -26,7 +26,14 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
+const multiFile = (proposal_acara, surat_peminjaman) => {
+    return upload.fields([
+        { name: proposal_acara, maxCount: 1 },
+        { name: surat_peminjaman, maxCount: 1 }
+    ]);
+}
 
 module.exports = {
-    upload
+    upload,
+    multiFile
 }

@@ -13,6 +13,7 @@ const keperRoute = require('../routes/keperluan')
 const peminRoute = require('../routes/peminjaman')
 const fileRoute = require('../routes/file')
 const kelasPengganti = require('../routes/kelaspengganti')
+const acaraOrganisasi = require('../routes/acaraorganisasi')
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -39,5 +40,6 @@ app.use('/keperluans', keperRoute);
 app.use('/peminjamans', peminRoute);
 app.use('/files', fileRoute);
 app.use('/kelasPengganti', kelasPengganti);
+app.use('/acaraOrganisasi', acaraOrganisasi);
 
 module.exports = app;
