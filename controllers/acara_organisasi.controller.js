@@ -5,31 +5,35 @@ async function create(req, res) {
         const {
             nama_organisasi,
             penanggung_jawab,
-            no_whatsapp,
+            no_whatssapp,
             nama_acara,
             nama_lab,
             tanggal_mulai,
+            tanggal_selesai,
             jam_mulai,
             jam_selesai,
             keterangan,
             id_user,
         } = req.body;
-        
-        
+
+        const proposal_acara = req.files.proposal_acara[0].filename;
+        const surat_peminjaman = req.files.surat_peminjaman[0].filename;
+
         if(req.files){
             await models.Data_Acara_Organisasi.create({
                 nama_organisasi: nama_organisasi,
                 penanggung_jawab: penanggung_jawab,
-                no_whatssapp: no_whatsapp,
+                no_whatssapp: no_whatssapp,
                 nama_acara: nama_acara,
                 nama_lab: nama_lab,
                 tanggal_mulai: tanggal_mulai,
+                tanggal_selesai: tanggal_selesai,
                 jam_mulai: jam_mulai,
                 jam_selesai: jam_selesai,
                 keterangan: keterangan,
                 id_user: id_user,
-                proposal_acara: req.files[0].filename,
-                surat_peminjaman: req.files[1].filename
+                proposal_acara: proposal_acara,
+                surat_peminjaman: surat_peminjaman
             });
 
             return res.status(201).json({
@@ -37,16 +41,16 @@ async function create(req, res) {
             });
         } else {
             return res.status(400).json({
-                message: "No files were uploaded"
+                message: "Please upload both proposal and permission letter files"
             });
         }
     } catch (error) {
-        console.log(req.files[0]
         return res.status(500).json({
             message: "Something went wrong",
         });
     }
 }
+
 
 async function index(_, res) {
     try {
@@ -61,6 +65,7 @@ async function index(_, res) {
                 nama_acara,
                 nama_lab,
                 tanggal_mulai,
+                tanggal_selesai,
                 jam_mulai,
                 jam_selesai,
                 keterangan,
@@ -73,6 +78,7 @@ async function index(_, res) {
                 nama_acara,
                 nama_lab,
                 tanggal_mulai,
+                tanggal_selesai,
                 jam_mulai,
                 jam_selesai,
                 keterangan,
@@ -95,10 +101,10 @@ async function index(_, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan } = req.body;
+      const { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, tanggal_selesai, jam_mulai, jam_selesai, keterangan } = req.body;
 
       const [updatedRowsCount] = await models.Data_Acara_Organisasi.update(
-        { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan },
+        { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, tanggal_selesai, jam_mulai, jam_selesai, keterangan },
         { where: { id: id } }
       );
 

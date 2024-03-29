@@ -33,6 +33,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      tanggal_selesai: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       jam_mulai: {
         allowNull: false,
         type: Sequelize.STRING

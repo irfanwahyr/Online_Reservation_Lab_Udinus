@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     nama_acara: DataTypes.STRING,
     nama_lab: DataTypes.STRING,
     tanggal_mulai: DataTypes.STRING,
+    tanggal_selesai: DataTypes.STRING,
     jam_mulai: DataTypes.STRING,
     jam_selesai: DataTypes.STRING,
     keterangan: DataTypes.STRING,

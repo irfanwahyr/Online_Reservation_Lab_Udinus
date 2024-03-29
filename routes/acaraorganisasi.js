@@ -8,8 +8,7 @@ const router = express.Router();
 router.post(
     '/create',
     checkMiddleware.checkAuth,
-    fileUploader.upload1.single('proposal_acara'),
-    fileUploader.upload2.single('surat_peminjaman'),
+    fileUploader.multiUpload,
     acaraorganisasiController.create
     );
 
