@@ -15,7 +15,7 @@ async function create(req, res) {
             id_user,
         } = req.body;
 
-        if(req.file){
+        if(req.proposal_acara){
             await models.Data_Acara_Organisasi.create({
                 nama_organisasi: nama_organisasi,
                 penanggung_jawab: penanggung_jawab,
@@ -27,8 +27,8 @@ async function create(req, res) {
                 jam_selesai: jam_selesai,
                 keterangan: keterangan,
                 id_user: id_user,
-                proposal_acara: req.file.filename,
-                surat_peminjaman: req.file.filename
+                proposal_acara: req.proposal_acara.filename,
+                surat_peminjaman: req.surat_peminjaman.filename
             });
 
             return res.status(201).json({
