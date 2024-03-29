@@ -12,4 +12,6 @@ router.post(
     acaraorganisasiController.create
     );
 
+router.get('/:id', acaraorganisasiController.show_by_id);
+
 module.exports = router;

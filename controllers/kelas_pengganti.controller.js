@@ -69,6 +69,43 @@ async function index(_, res) {
     }
 }
 
+async function show_by_id(req, res) {
+    try {
+        const id_user = req.params.id;
+
+        const result = await models.Data_Kelas_Pengganti.findAll({
+            where: {
+                id_user: id_user
+            }
+        });
+
+        if (result && result.length > 0) {
+            const hasil = result.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan }) => ({
+                id,
+                nama_dosen,
+                mata_kuliah,
+                kelompok,
+                no_whatsapp,
+                nama_lab,
+                tanggal_mulai,
+                jam_mulai,
+                jam_selesai,
+                keterangan
+            }));
+
+            res.status(200).json(hasil);
+        } else {
+            res.status(404).json({
+                message: "kelas pengganti not found",
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: "Internal Server Error",
+        });
+    }
+}
+
 async function update(req, res) {
     try {
       const id = req.params.id;
@@ -130,5 +167,6 @@ module.exports = {
     create,
     index,
     update,
-    destroy
+    destroy,
+    show_by_id
 }

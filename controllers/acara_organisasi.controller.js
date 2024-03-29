@@ -51,6 +51,57 @@ async function create(req, res) {
     }
 }
 
+async function show_by_id(req, res) {
+    try {
+        const id_user = req.params.id;
+
+        const result = await models.Data_Acara_Organisasi.findAll({
+            where: {
+                id_user: id_user
+            }
+        });
+
+        if (result && result.length > 0) {
+            const acara_organisasi = result.map(({
+                id,
+                nama_organisasi,
+                penanggung_jawab,
+                no_whatsapp,
+                nama_acara,
+                nama_lab,
+                tanggal_mulai,
+                tanggal_selesai,
+                jam_mulai,
+                jam_selesai,
+                keterangan,
+                id_user,
+            }) => ({
+                id,
+                nama_organisasi,
+                penanggung_jawab,
+                no_whatsapp,
+                nama_acara,
+                nama_lab,
+                tanggal_mulai,
+                tanggal_selesai,
+                jam_mulai,
+                jam_selesai,
+                keterangan,
+                id_user,
+            }));
+
+            res.status(200).json(acara_organisasi);
+        } else {
+            res.status(404).json({
+                message: "acara organisasi not found",
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: "Internal Server Error",
+        });
+    }
+}
 
 async function index(_, res) {
     try {
@@ -159,5 +210,6 @@ module.exports = {
     create,
     index,
     update,
-    destroy
+    destroy,
+    show_by_id
 }
