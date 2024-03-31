@@ -127,7 +127,7 @@ const signIn = async (req, res) => {
   }
 };
 
-const logout = async (req, res) => {
+async function logout(req, res) {
   try {
     res.clearCookie('jwt_token');
 

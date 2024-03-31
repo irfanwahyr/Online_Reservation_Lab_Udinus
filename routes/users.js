@@ -5,6 +5,7 @@ const checkMiddleware = require('../middleware/check_auth');
 
 router.post('/register', userController.signUp);
 router.post('/login', userController.signIn);
+router.post('/logout', checkMiddleware.checkAuth, userController.logout);
 
 router.get('/', userController.index);
 router.get('/:id', userController.show_by_id);
