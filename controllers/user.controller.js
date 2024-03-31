@@ -2,8 +2,8 @@ const models = require('../models');
 const { userSchema } = require('../validation/user_validation');
 const { hashPass } = require('../bcrypt/user_pass');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 async function isEmailUnique(email) {
   try {
@@ -118,6 +118,24 @@ const signIn = async (req, res) => {
           message: "Authentication failed",
         });
       }
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+const logout = async (req, res) => {
+  try {
+    res.clearCookie('jwt_token');
+
+    const token = jwt.sign({}, process.env.JWT_KEY, { expiresIn: 0 });
+
+    return res.status(200).json({
+      message: "Logout success",
+      token: null,
     });
   } catch (error) {
     console.error(error);
@@ -258,6 +276,7 @@ async function destroy(req, res) {
 module.exports = {
   signUp,
   signIn,
+  logout,
   show_by_id,
   index,
   update,
