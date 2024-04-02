@@ -14,6 +14,7 @@ const peminRoute = require('../routes/peminjaman')
 const fileRoute = require('../routes/file')
 const kelasPengganti = require('../routes/kelaspengganti')
 const acaraOrganisasi = require('../routes/acaraorganisasi')
+const acaraKampus = require('../routes/acarakampus')
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -27,7 +28,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
-app.use('/uploads', express.static('uploads/acara_organisasi'));
+app.use('/uploads', express.static('uploads/'));
 
 app.use('/users', userRoute);
 app.use('/labs', labRoute);
@@ -41,5 +42,6 @@ app.use('/peminjamans', peminRoute);
 app.use('/files', fileRoute);
 app.use('/kelasPengganti', kelasPengganti);
 app.use('/acaraOrganisasi', acaraOrganisasi);
+app.use('/acaraKampus', acaraKampus);
 
 module.exports = app;

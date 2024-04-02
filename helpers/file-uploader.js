@@ -5,7 +5,7 @@ const { exec } = require('child_process');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads/acara_organisasi');
+        cb(null, './uploads/');
     },
     filename: function (req, file, cb) {
         cb(null, new Date().getTime() + path.extname(file.originalname));
