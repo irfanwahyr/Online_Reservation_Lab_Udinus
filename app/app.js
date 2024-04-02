@@ -27,7 +27,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads/acara_organisasi'));
 
 app.use('/users', userRoute);
 app.use('/labs', labRoute);
