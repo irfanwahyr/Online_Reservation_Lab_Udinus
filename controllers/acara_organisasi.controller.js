@@ -112,7 +112,7 @@ async function index(_, res) {
                 id,
                 nama_organisasi,
                 penanggung_jawab,
-                no_whatsapp,
+                no_whatssapp,
                 nama_acara,
                 nama_lab,
                 tanggal_mulai,
@@ -121,13 +121,11 @@ async function index(_, res) {
                 jam_selesai,
                 keterangan,
                 id_user,
-                proposal_acara,
-                surat_peminjaman
             }) => ({
                 id,
                 nama_organisasi,
                 penanggung_jawab,
-                no_whatsapp,
+                no_whatssapp,
                 nama_acara,
                 nama_lab,
                 tanggal_mulai,
@@ -136,8 +134,6 @@ async function index(_, res) {
                 jam_selesai,
                 keterangan,
                 id_user,
-                proposal_acara,
-                surat_peminjaman
             }));
 
             res.status(200).json(acara_organisasi);
