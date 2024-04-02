@@ -47,14 +47,11 @@ const convertToPDF = (filePath) => {
 
     exec(`convert ${filePath} ${pdfPath}`, (error, stdout, stderr) => {
         if (error) {
-            console.error(`Error converting file to PDF: ${error.message}`);
             return;
         }
         if (stderr) {
-            console.error(`Error converting file to PDF: ${stderr}`);
             return;
         }
-        console.log(`File converted to PDF: ${pdfPath}`);
     });
 };
 
