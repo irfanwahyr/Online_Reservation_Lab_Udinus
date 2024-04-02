@@ -121,6 +121,8 @@ async function index(_, res) {
                 jam_selesai,
                 keterangan,
                 id_user,
+                proposal_acara,
+                surat_peminjaman
             }) => ({
                 id,
                 nama_organisasi,
@@ -134,6 +136,8 @@ async function index(_, res) {
                 jam_selesai,
                 keterangan,
                 id_user,
+                proposal_acara,
+                surat_peminjaman
             }));
 
             res.status(200).json(acara_organisasi);
