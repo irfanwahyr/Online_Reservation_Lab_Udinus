@@ -13,5 +13,6 @@ router.post(
     );
 
 router.get('/:id', acaraorganisasiController.show_by_id);
+router.get('/', acaraorganisasiController.index);
 
 module.exports = router;
