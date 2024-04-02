@@ -92,18 +92,18 @@ const signIn = async (req, res) => {
           {expiresIn: '1h'}
         );
 
-        // duration timeout
-        const responseTimeOut = 60 * 60 * 1000;
-        setTimeout(() => {
-          return res.status(200).json({
-            message: "Authentication success",
-            token: null, // Send null token after timeout
-            id: user.id,
-            email: user.email,
-            username: user.username,
-            role: user.role,
-          });
-        }, responseTimeOut);
+        // // duration timeout
+        // const responseTimeOut = 30 * 1000;
+        // setTimeout(() => {
+        //   return res.status(200).json({
+        //     message: "Authentication success",
+        //     token: null, // Send null token after timeout
+        //     id: user.id,
+        //     email: user.email,
+        //     username: user.username,
+        //     role: user.role,
+        //   });
+        // }, responseTimeOut);
 
         return res.status(200).json({
           message: "Authentication success",
@@ -135,7 +135,6 @@ async function logout(req, res) {
 
     return res.status(200).json({
       message: "Logout success",
-      token: null,
     });
   } catch (error) {
     console.error(error);
