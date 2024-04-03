@@ -26,10 +26,10 @@ async function create(req, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { kelompok, mata_kuliah } = req.body;
+      const { kelompok, mata_kuliah, jam_mulai, jam_selesai } = req.body;
 
       const [updatedRowsCount] = await models.Jadwal.update(
-        { kelompok, mata_kuliah },
+        { kelompok, mata_kuliah, jam_mulai, jam_selesai },
         { where: { id: id } }
       );
 
