@@ -13,7 +13,6 @@ async function create(req, res) {
             jam_selesai,
             keterangan,
             id_user,
-            id_matakuliah
         } = req.body;
 
         await models.Data_Kelas_Pengganti.create({
@@ -27,7 +26,6 @@ async function create(req, res) {
             jam_selesai: jam_selesai,
             keterangan: keterangan,
             id_user: id_user,
-            id_matakuliah
         });
 
         return res.status(201).json({
@@ -56,7 +54,6 @@ async function index(_, res) {
                 jam_mulai,
                 jam_selesai,
                 keterangan,
-                id_matakuliah
             }));
 
             res.status(200).json(kelas_pengganti);
