@@ -13,6 +13,7 @@ async function create(req, res) {
             jam_selesai,
             keterangan,
             id_user,
+            id_matakuliah
         } = req.body;
 
         await models.Data_Kelas_Pengganti.create({
@@ -25,7 +26,8 @@ async function create(req, res) {
             jam_mulai: jam_mulai,
             jam_selesai: jam_selesai,
             keterangan: keterangan,
-            id_user: id_user
+            id_user: id_user,
+            id_matakuliah
         });
 
         return res.status(201).json({
@@ -43,7 +45,7 @@ async function index(_, res) {
         const results = await models.Data_Kelas_Pengganti.findAll();
 
         if (results && results.length > 0) {
-            const hardware = results.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan }) => ({
+            const kelas_pengganti = results.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan }) => ({
                 id,
                 nama_dosen,
                 mata_kuliah,
@@ -53,10 +55,11 @@ async function index(_, res) {
                 tanggal_mulai,
                 jam_mulai,
                 jam_selesai,
-                keterangan
+                keterangan,
+                id_matakuliah
             }));
 
-            res.status(200).json(hardware);
+            res.status(200).json(kelas_pengganti);
         } else {
             res.status(200).json({
                 message: "No Data Kelas Pengganti found",
@@ -80,7 +83,7 @@ async function show_by_id(req, res) {
         });
 
         if (result && result.length > 0) {
-            const hasil = result.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan }) => ({
+            const hasil = result.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan, id_matakuliah }) => ({
                 id,
                 nama_dosen,
                 mata_kuliah,
@@ -90,7 +93,8 @@ async function show_by_id(req, res) {
                 tanggal_mulai,
                 jam_mulai,
                 jam_selesai,
-                keterangan
+                keterangan,
+                id_matakuliah
             }));
 
             res.status(200).json(hasil);
@@ -109,10 +113,32 @@ async function show_by_id(req, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan } = req.body;
+      const {
+        nama_dosen,
+        mata_kuliah,
+        kelompok,
+        no_whatsapp,
+        nama_lab,
+        tanggal_mulai,
+        jam_mulai,
+        jam_selesai,
+        keterangan,
+        id_matakuliah
+    } = req.body;
 
       const [updatedRowsCount] = await models.Data_Kelas_Pengganti.update(
-        { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan },
+        {
+            nama_dosen,
+            mata_kuliah,
+            kelompok,
+            no_whatsapp,
+            nama_lab,
+            tanggal_mulai,
+            jam_mulai,
+            jam_selesai,
+            keterangan,
+            id_matakuliah
+        },
         { where: { id: id } }
       );
 

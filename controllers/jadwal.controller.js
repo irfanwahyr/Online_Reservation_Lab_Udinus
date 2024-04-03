@@ -50,7 +50,17 @@ async function update(req, res) {
         message: "Internal Server Error",
       });
     }
-  }
+}
+
+// async function update_after_accept(req, res) {
+//     try {
+//         const { id_hari, mata_kuliah, jam_mulai, jam_selesai, tanggal_mulai } = req.body;
+
+
+//     } catch (error) {
+
+//     }
+// }
 
 function getLabRange(lab) {
     let labStartRange, labEndRange;
