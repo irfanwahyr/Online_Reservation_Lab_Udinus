@@ -8,7 +8,6 @@ router.get('/:id', softwareController.show_by_id);
 
 router.post('/create', checkMiddleware.checkAuth, softwareController.create);
 router.post('/update/:id', checkMiddleware.checkAuth, softwareController.update);
-router.post('/delete/:id', checkMiddleware.checkAuth, softwareController.destroy);
 
 
 module.exports = router;

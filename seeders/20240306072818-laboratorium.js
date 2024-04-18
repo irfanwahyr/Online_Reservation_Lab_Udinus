@@ -34,7 +34,6 @@ module.exports = {
     const data_lab = [];
 
     for (let i = 0; i < nama_lab.length; i++) {
-
       data_lab.push({
         nama_lab: nama_lab[i],
         jumlah_pc: jumlah_pc[i],
