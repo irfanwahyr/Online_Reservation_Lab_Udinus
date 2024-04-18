@@ -13,8 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Software.init({
-    nama_software: DataTypes.STRING,
-    versi: DataTypes.STRING,
+    software_1: DataTypes.STRING,
+    software_2: DataTypes.STRING,
+    software_3: DataTypes.STRING,
+    software_4: DataTypes.STRING,
+    software_5: DataTypes.STRING,
     id_lab: DataTypes.INTEGER
   }, {
     sequelize,

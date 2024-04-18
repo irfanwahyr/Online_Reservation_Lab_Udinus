@@ -8,6 +8,5 @@ router.get('/:id', hardwareController.show_by_id);
 
 router.post('/create', checkMiddleware.checkAuth, hardwareController.create);
 router.post('/update/:id', checkMiddleware.checkAuth, hardwareController.update);
-router.post('/delete/:id', checkMiddleware.checkAuth, hardwareController.destroy);
 
 module.exports = router;

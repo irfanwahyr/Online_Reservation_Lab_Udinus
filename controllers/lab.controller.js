@@ -26,12 +26,12 @@ async function index(_, res) {
             include: [{
                 model: models.Software,
                 as: 'software',
-                attributes: [ 'id', 'nama_software', 'versi']
+                attributes: [ 'id', 'software_1', 'software_2', 'software_3', 'software_4', 'software_5', 'id_lab']
             },
             {
                 model: models.hardware,
                 as: 'hardware',
-                attributes: [ 'id', 'processor', 'ram', 'gpu', 'monitor', 'storage']
+                attributes: [ 'id', 'processor', 'ram', 'gpu', 'monitor', 'storage', 'id_lab']
             },
         ]
         });
@@ -127,7 +127,7 @@ async function show_by_id(req, res) {
             {
                 model: models.Software,
                 as: 'software',
-                attributes: [ 'id', 'nama_software', 'versi']
+                attributes: [ 'id', 'software_1', 'software_2', 'software_3', 'software_4', 'software_5']
             },
             {
                 model: models.hardware,
