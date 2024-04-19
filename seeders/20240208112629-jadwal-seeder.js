@@ -28,6 +28,7 @@ module.exports = {
     let j = 0;
     let jam_mulai = "";
     let jam_selesai = "";
+    const id_pesan = 1;
 
     for (let i = 0; i < 1170; i++) {
      if(j == 14){
@@ -45,6 +46,7 @@ module.exports = {
         jam_mulai,
         jam_selesai,
         id_hari,
+        id_pesan: 1,
         createdAt: currentDate,
         updatedAt: currentDate,
       });

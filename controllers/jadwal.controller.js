@@ -3,7 +3,7 @@ const jadwal = require('../models/jadwal');
 
 async function create(req, res) {
     try {
-        const { kelompok, mata_kuliah, jam_mulai, jam_selesai } = req.body;
+        const { kelompok, mata_kuliah, jam_mulai, jam_selesai, id_pesan } = req.body;
 
         // Data input valid, continue with the create operation
         await models.Jadwal.create({
@@ -11,6 +11,7 @@ async function create(req, res) {
             mata_kuliah: mata_kuliah,
             jam_mulai: jam_mulai,
             jam_selesai: jam_selesai,
+            id_pesan: id_pesan
         });
 
         return res.status(201).json({
@@ -26,10 +27,10 @@ async function create(req, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { kelompok, mata_kuliah, jam_mulai, jam_selesai, id_hari } = req.body;
+      const { kelompok, mata_kuliah, jam_mulai, jam_selesai, id_hari, id_pesan } = req.body;
 
       const [updatedRowsCount] = await models.Jadwal.update(
-        { kelompok, mata_kuliah, jam_mulai, jam_selesai, id_hari },
+        { kelompok, mata_kuliah, jam_mulai, jam_selesai, id_hari, id_pesan },
         { where: { id: id } }
       );
 
@@ -44,23 +45,12 @@ async function update(req, res) {
         });
       }
     } catch (error) {
-      console.error(error);
       res.status(500).json({
         status: res.status,
         message: "Internal Server Error",
       });
     }
 }
-
-// async function update_after_accept(req, res) {
-//     try {
-//         const { id_hari, mata_kuliah, jam_mulai, jam_selesai, tanggal_mulai } = req.body;
-
-
-//     } catch (error) {
-
-//     }
-// }
 
 function getLabRange(lab) {
     let labStartRange, labEndRange;
@@ -155,17 +145,18 @@ async function show_by_lab_hari(req, res) {
             limit: itemsPerPage,
             offset: 0,
         });
-        
+
         console.log(labRanges.labEndRange);
 
         if (results && results.length > 0) {
-            const jadwal = results.map(({ id, kelompok, mata_kuliah, jam_mulai, jam_selesai, id_hari }) => ({
+            const jadwal = results.map(({ id, kelompok, mata_kuliah, jam_mulai, jam_selesai, id_hari, id_pesan }) => ({
                 id,
                 kelompok,
                 mata_kuliah,
                 jam_mulai,
                 jam_selesai,
                 id_hari,
+                id_pesan,
             }));
 
             res.status(200).json(jadwal);
