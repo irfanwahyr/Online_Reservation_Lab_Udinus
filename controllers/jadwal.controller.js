@@ -26,29 +26,47 @@ async function create(req, res) {
 
 async function update(req, res) {
     try {
-      const id = req.params.id;
-      const { kelompok, mata_kuliah, jam_mulai, jam_selesai, id_hari, id_pesan } = req.body;
+        const id = req.params.id;
+        const { kelompok, mata_kuliah, jam_mulai, jam_selesai, id_hari, id_pesan, is_pinjam } = req.body;
 
-      const [updatedRowsCount] = await models.Jadwal.update(
-        { kelompok, mata_kuliah, jam_mulai, jam_selesai, id_hari, id_pesan },
-        { where: { id: id } }
-      );
+        let updatedRowsCount;
 
-      if (updatedRowsCount > 0) {
-        res.status(200).json({
-          message: "jadwal updated successfully",
-        });
-      } else {
-        res.status(404).json({
-          status: res.status,
-          message: "jadwal not found",
-        });
-      }
+        if (is_pinjam) {
+            let newIdPesan;
+            if (id_pesan === 1) {
+                newIdPesan = 2;
+            } else if (id_pesan === 2) {
+                newIdPesan = 3;
+            } else {
+                newIdPesan = 1;
+            }
+
+            [updatedRowsCount] = await models.Jadwal.update(
+                { id_pesan: newIdPesan },
+                { where: { id: id } }
+            );
+        } else {
+            [updatedRowsCount] = await models.Jadwal.update(
+                { kelompok, mata_kuliah, jam_mulai, jam_selesai, id_hari, id_pesan },
+                { where: { id: id } }
+            );
+        }
+
+        if (updatedRowsCount > 0) {
+            res.status(200).json({
+                message: "jadwal updated successfully",
+            });
+        } else {
+            res.status(404).json({
+                status: 404,
+                message: "jadwal not found",
+            });
+        }
     } catch (error) {
-      res.status(500).json({
-        status: res.status,
-        message: "Internal Server Error",
-      });
+        res.status(500).json({
+            status: 500,
+            message: "Internal Server Error",
+        });
     }
 }
 
