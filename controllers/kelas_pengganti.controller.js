@@ -13,6 +13,7 @@ async function create(req, res) {
             jam_selesai,
             keterangan,
             id_user,
+            id_jadwal,
         } = req.body;
 
         await models.Data_Kelas_Pengganti.create({
@@ -26,6 +27,7 @@ async function create(req, res) {
             jam_selesai: jam_selesai,
             keterangan: keterangan,
             id_user: id_user,
+            id_jadwal: id_jadwal
         });
 
         return res.status(201).json({
@@ -43,7 +45,7 @@ async function index(_, res) {
         const results = await models.Data_Kelas_Pengganti.findAll();
 
         if (results && results.length > 0) {
-            const kelas_pengganti = results.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan }) => ({
+            const kelas_pengganti = results.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan, id_jadwal }) => ({
                 id,
                 nama_dosen,
                 mata_kuliah,
@@ -54,6 +56,7 @@ async function index(_, res) {
                 jam_mulai,
                 jam_selesai,
                 keterangan,
+                id_jadwal
             }));
 
             res.status(200).json(kelas_pengganti);
@@ -80,7 +83,7 @@ async function show_by_id(req, res) {
         });
 
         if (result && result.length > 0) {
-            const hasil = result.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan, id_matakuliah }) => ({
+            const hasil = result.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan, id_matakuliah, id_jadwal }) => ({
                 id,
                 nama_dosen,
                 mata_kuliah,
@@ -91,9 +94,9 @@ async function show_by_id(req, res) {
                 jam_mulai,
                 jam_selesai,
                 keterangan,
-                id_matakuliah
+                id_matakuliah,
+                id_jadwal
             }));
-
             res.status(200).json(hasil);
         } else {
             res.status(404).json({
@@ -120,7 +123,8 @@ async function update(req, res) {
         jam_mulai,
         jam_selesai,
         keterangan,
-        id_matakuliah
+        id_matakuliah,
+        id_jadwal
     } = req.body;
 
       const [updatedRowsCount] = await models.Data_Kelas_Pengganti.update(
@@ -134,7 +138,8 @@ async function update(req, res) {
             jam_mulai,
             jam_selesai,
             keterangan,
-            id_matakuliah
+            id_matakuliah,
+            id_jadwal
         },
         { where: { id: id } }
       );

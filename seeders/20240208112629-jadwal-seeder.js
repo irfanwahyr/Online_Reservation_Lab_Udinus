@@ -45,7 +45,7 @@ module.exports = {
         jam_mulai,
         jam_selesai,
         id_hari,
-        id_pesan: 2,
+        id_pesan: 1,
         createdAt: currentDate,
         updatedAt: currentDate,
       });

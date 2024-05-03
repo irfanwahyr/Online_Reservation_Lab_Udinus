@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     jam_mulai: DataTypes.STRING,
     jam_selesai: DataTypes.STRING,
     keterangan: DataTypes.STRING,
-    id_user: DataTypes.INTEGER
+    id_user: DataTypes.INTEGER,
+    id_jadwal: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Data_Kelas_Pengganti',
