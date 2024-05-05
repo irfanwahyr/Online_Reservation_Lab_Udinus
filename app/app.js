@@ -15,6 +15,7 @@ const fileRoute = require('../routes/file')
 const kelasPengganti = require('../routes/kelaspengganti')
 const acaraOrganisasi = require('../routes/acaraorganisasi')
 const acaraKampus = require('../routes/acarakampus')
+const riwayatUser = require('../routes/datariwayatuser')
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -43,5 +44,6 @@ app.use('/files', fileRoute);
 app.use('/kelasPengganti', kelasPengganti);
 app.use('/acaraOrganisasi', acaraOrganisasi);
 app.use('/acaraKampus', acaraKampus);
+app.use('/riwayat', riwayatUser);
 
 module.exports = app;
