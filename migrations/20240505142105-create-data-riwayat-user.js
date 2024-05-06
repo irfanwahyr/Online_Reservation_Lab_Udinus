@@ -9,15 +9,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nama_keperluan: {
+      nama_acara: {
         allowNull: false,
         type: Sequelize.STRING
       },
       nama_lab: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      nama_acara: {
         allowNull: false,
         type: Sequelize.STRING
       },

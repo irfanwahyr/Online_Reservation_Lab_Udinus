@@ -14,9 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Data_Riwayat_User.init({
-    nama_keperluan: DataTypes.STRING,
-    nama_lab: DataTypes.STRING,
     nama_acara: DataTypes.STRING,
+    nama_lab: DataTypes.STRING,
     tanggal_mulai: DataTypes.STRING,
     tanggal_selesai: DataTypes.STRING,
     jam_mulai: DataTypes.STRING,
