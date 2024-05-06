@@ -45,7 +45,7 @@ async function index(_, res) {
         const results = await models.Data_Kelas_Pengganti.findAll();
 
         if (results && results.length > 0) {
-            const kelas_pengganti = results.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan, id_jadwal }) => ({
+            const kelas_pengganti = results.map(({ id, nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, jam_mulai, jam_selesai, keterangan, id_jadwal, id_user }) => ({
                 id,
                 nama_dosen,
                 mata_kuliah,
@@ -56,7 +56,8 @@ async function index(_, res) {
                 jam_mulai,
                 jam_selesai,
                 keterangan,
-                id_jadwal
+                id_jadwal,
+                id_user
             }));
 
             res.status(200).json(kelas_pengganti);

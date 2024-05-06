@@ -3,9 +3,8 @@ const models = require('../models');
 async function create(req, res) {
     try {
         const {
-            nama_keperluan,
-            nama_lab,
             nama_acara,
+            nama_lab,
             tanggal_mulai,
             tanggal_selesai,
             jam_mulai,
@@ -16,7 +15,6 @@ async function create(req, res) {
         } = req.body;
 
         await models.Data_Riwayat_User.create({
-            nama_keperluan: nama_keperluan,
             nama_lab: nama_lab,
             nama_acara: nama_acara,
             tanggal_mulai: tanggal_mulai,
@@ -30,10 +28,11 @@ async function create(req, res) {
 
         return res.status(201).json({
             message: "Created new Data Riwayat User"
-          });
+        });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({
-            message: "Something went wrong",
+            message: "Something went wrong Riwayat User",
         });
     }
 }
