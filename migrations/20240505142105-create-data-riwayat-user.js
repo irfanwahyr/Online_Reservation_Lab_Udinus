@@ -41,6 +41,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.BOOLEAN
       },
+      alasan: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       id_user: {
         allowNull: false,
         type: Sequelize.INTEGER,

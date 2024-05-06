@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     jam_mulai: DataTypes.STRING,
     jam_selesai: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
+    alasan: DataTypes.STRING,
     id_user: DataTypes.INTEGER
   }, {
     sequelize,
