@@ -5,5 +5,6 @@ const checkMiddleware = require('../middleware/check_auth');
 
 router.post('/create', checkMiddleware.checkAuth, riwayat_pesanan.create);
 router.get('/:id', riwayat_pesanan.show_by_id);
+router.get('/', riwayat_pesanan.index);
 
 module.exports = router;

@@ -63,7 +63,40 @@ async function show_by_id(req, res) {
     }
 }
 
+async function index(_, res) {
+    try {
+        const results = await models.Data_Riwayat_User.findAll();
+        console.log(results);
+        console.log("Length : " + results.length);
+        if (results && results.length > 0) {
+            const riwayat_pesanan = results.map(({ id, nama_acara, nama_lab, tanggal_mulai, tanggal_selesai, jam_mulai, jam_selesai, status, alasan, id_user }) => ({
+                id,
+                nama_acara,
+                nama_lab,
+                tanggal_mulai,
+                tanggal_selesai,
+                jam_mulai,
+                jam_selesai,
+                status,
+                alasan,
+                id_user
+            }));
+
+            res.status(200).json(riwayat_pesanan);
+        } else {
+            res.status(200).json({
+                message: "No Data Riwayat found",
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: "Unable to retrieve Data Riwayat User. Something went wrong.",
+        });
+    }
+}
+
 module.exports = {
+    index,
     create,
     show_by_id
 }
