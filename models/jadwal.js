@@ -20,6 +20,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id_hari',
         as: 'hari'
       });
+
+      Jadwal.hasOne(models.Data_Riwayat_User, {
+        foreignKey: 'id',
+        as: 'id_jadwal'
+      }
+      )
     }
   }
   Jadwal.init({

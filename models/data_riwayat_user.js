@@ -10,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+
+      Data_Riwayat_User.belongsTo(models.Jadwal, {
+        foreignKey: 'id_jadwal',
+        as: 'jadwal'
+      });
     }
   }
   Data_Riwayat_User.init({
@@ -22,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     jam_selesai: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
     alasan: DataTypes.STRING,
-    id_user: DataTypes.INTEGER
+    id_user: DataTypes.INTEGER,
+    id_jadwal: DataTypes.INTEGER,
+    flag: DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'Data_Riwayat_User',
