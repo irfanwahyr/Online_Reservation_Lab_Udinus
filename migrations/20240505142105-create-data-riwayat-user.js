@@ -49,6 +49,18 @@ module.exports = {
           key: 'id'
         },
       },
+      id_jadwal: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Jadwals',
+          key: 'id'
+        },
+      },
+      flag: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

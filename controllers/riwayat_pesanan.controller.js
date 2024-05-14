@@ -11,7 +11,9 @@ async function create(req, res) {
             jam_selesai,
             status,
             alasan,
-            id_user
+            id_user,
+            id_jadwal,
+            flag
         } = req.body;
 
         await models.Data_Riwayat_User.create({
@@ -24,6 +26,8 @@ async function create(req, res) {
             status: status,
             alasan: alasan,
             id_user: id_user,
+            id_jadwal: id_jadwal,
+            flag: flag
         });
 
         return res.status(201).json({
@@ -63,13 +67,38 @@ async function show_by_id(req, res) {
     }
 }
 
+async function update(req, res){
+    try {
+        const id = req.params.id;
+        const [updatedRowsCount] = await models.Users.update(
+            { flag: true },
+            { where: { id: id } }
+          );
+      
+          if (updatedRowsCount > 0) {
+            res.status(200).json({
+              status: res.status,
+              message: "User updated successfully",
+            });
+          } else {
+            res.status(404).json({
+              status: res.status,
+              message: "User not found",
+            });
+          }
+    } catch (error) {
+        res.status(500).json({
+        status: res.status,
+        message: "Internal Server Error",
+        });
+    }
+}
+
 async function index(_, res) {
     try {
         const results = await models.Data_Riwayat_User.findAll();
-        console.log(results);
-        console.log("Length : " + results.length);
         if (results && results.length > 0) {
-            const riwayat_pesanan = results.map(({ id, nama_acara, nama_lab, tanggal_mulai, tanggal_selesai, jam_mulai, jam_selesai, status, alasan, id_user }) => ({
+            const riwayat_pesanan = results.map(({ id, nama_acara, nama_lab, tanggal_mulai, tanggal_selesai, jam_mulai, jam_selesai, status, alasan, id_user, id_jadwal, flag }) => ({
                 id,
                 nama_acara,
                 nama_lab,
@@ -79,7 +108,9 @@ async function index(_, res) {
                 jam_selesai,
                 status,
                 alasan,
-                id_user
+                id_user,
+                id_jadwal,
+                flag
             }));
 
             res.status(200).json(riwayat_pesanan);
@@ -98,5 +129,6 @@ async function index(_, res) {
 module.exports = {
     index,
     create,
-    show_by_id
+    show_by_id,
+    update
 }
