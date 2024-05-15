@@ -55,6 +55,62 @@ async function update(req, res) {
 async function update_telah_pinjam(req, res) {
     try {
         const id = req.params.id;
+        const { kelompok, mata_kuliah, id_pesan  } = req.body;
+
+        const [updatedRowsCount] = await models.Jadwal.update(
+            { kelompok, mata_kuliah, id_pesan },
+            { where: { id: id } }
+        );
+
+        if (updatedRowsCount > 0) {
+            res.status(200).json({
+                message: "jadwal updated successfully",
+            });
+        } else {
+            res.status(404).json({
+                status: 404,
+                message: "jadwal not found",
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            status: 500,
+            message: "Internal Server Error",
+        });
+    }
+}
+
+async function reset_jadwal(req, res) {
+    try {
+        const id = req.params.id;
+        const { id_pesan } = req.body;
+
+        const [updatedRowsCount] = await models.Jadwal.update(
+            { id_pesan },
+            { where: { id: id } }
+        );
+
+        if (updatedRowsCount > 0) {
+            res.status(200).json({
+                message: "jadwal updated successfully",
+            });
+        } else {
+            res.status(404).json({
+                status: 404,
+                message: "jadwal not found",
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            status: 500,
+            message: "Internal Server Error",
+        });
+    }
+}
+
+async function konfirmasi_admin(req, res) {
+    try {
+        const id = req.params.id;
         const { id_pesan } = req.body;
 
         const [updatedRowsCount] = await models.Jadwal.update(
@@ -206,5 +262,7 @@ module.exports = {
     create,
     update,
     show_by_lab_hari,
-    update_telah_pinjam
+    update_telah_pinjam,
+    reset_jadwal,
+    konfirmasi_admin
   };
