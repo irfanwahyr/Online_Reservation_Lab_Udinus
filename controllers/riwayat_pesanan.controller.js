@@ -70,7 +70,7 @@ async function show_by_id(req, res) {
 async function update(req, res){
     try {
         const id = req.params.id;
-        const [updatedRowsCount] = await models.Users.update(
+        const [updatedRowsCount] = await models.Data_Riwayat_User.update(
             { flag: true },
             { where: { id: id } }
           );
@@ -78,12 +78,12 @@ async function update(req, res){
           if (updatedRowsCount > 0) {
             res.status(200).json({
               status: res.status,
-              message: "User updated successfully",
+              message: "Flag updated successfully",
             });
           } else {
             res.status(404).json({
               status: res.status,
-              message: "User not found",
+              message: "Riwayat User not found",
             });
           }
     } catch (error) {
