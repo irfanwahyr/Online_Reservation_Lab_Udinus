@@ -13,6 +13,7 @@ router.post(
     );
 
 router.get('/:id', acaraorganisasiController.show_by_id);
+router.post('/delete/:id', checkMiddleware.checkAuth, acaraorganisasiController.destroy);
 router.get('/', acaraorganisasiController.index);
 
 module.exports = router;

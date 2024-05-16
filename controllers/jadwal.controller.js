@@ -83,10 +83,10 @@ async function update_telah_pinjam(req, res) {
 async function reset_jadwal(req, res) {
     try {
         const id = req.params.id;
-        const { id_pesan } = req.body;
+        const { kelompok, mata_kuliah, id_pesan } = req.body;
 
         const [updatedRowsCount] = await models.Jadwal.update(
-            { id_pesan },
+            { kelompok, mata_kuliah, id_pesan },
             { where: { id: id } }
         );
 

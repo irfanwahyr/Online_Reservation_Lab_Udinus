@@ -124,7 +124,6 @@ async function update(req, res) {
         jam_mulai,
         jam_selesai,
         keterangan,
-        id_matakuliah,
         id_jadwal
     } = req.body;
 
@@ -139,7 +138,6 @@ async function update(req, res) {
             jam_mulai,
             jam_selesai,
             keterangan,
-            id_matakuliah,
             id_jadwal
         },
         { where: { id: id } }
@@ -156,7 +154,7 @@ async function update(req, res) {
         });
       }
     } catch (error) {
-      console.error(error);
+    //   console.error(error);
       res.status(500).json({
         status: res.status,
         message: "Internal Server Error",

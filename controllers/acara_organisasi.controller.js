@@ -14,6 +14,7 @@ async function create(req, res) {
             jam_selesai,
             keterangan,
             id_user,
+            id_jadwal
         } = req.body;
 
         const proposal_acara = req.files.proposal_acara[0].filename;
@@ -32,6 +33,7 @@ async function create(req, res) {
                 jam_selesai: jam_selesai,
                 keterangan: keterangan,
                 id_user: id_user,
+                id_jadwal: id_jadwal,
                 proposal_acara: proposal_acara,
                 surat_peminjaman: surat_peminjaman
             });
@@ -75,6 +77,7 @@ async function show_by_id(req, res) {
                 jam_selesai,
                 keterangan,
                 id_user,
+                id_jadwal
             }) => ({
                 id,
                 nama_organisasi,
@@ -88,6 +91,7 @@ async function show_by_id(req, res) {
                 jam_selesai,
                 keterangan,
                 id_user,
+                id_jadwal
             }));
 
             res.status(200).json(acara_organisasi);
@@ -121,6 +125,7 @@ async function index(_, res) {
                 jam_selesai,
                 keterangan,
                 id_user,
+                id_jadwal,
                 proposal_acara,
                 surat_peminjaman
             }) => ({
@@ -136,6 +141,7 @@ async function index(_, res) {
                 jam_selesai,
                 keterangan,
                 id_user,
+                id_jadwal,
                 proposal_acara,
                 surat_peminjaman
             }));
@@ -156,10 +162,10 @@ async function index(_, res) {
 async function update(req, res) {
     try {
       const id = req.params.id;
-      const { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, tanggal_selesai, jam_mulai, jam_selesai, keterangan } = req.body;
+      const { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, tanggal_selesai, jam_mulai, jam_selesai, id_jadwal, keterangan } = req.body;
 
       const [updatedRowsCount] = await models.Data_Acara_Organisasi.update(
-        { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, tanggal_selesai, jam_mulai, jam_selesai, keterangan },
+        { nama_dosen, mata_kuliah, kelompok, no_whatsapp, nama_lab, tanggal_mulai, tanggal_selesai, jam_mulai, jam_selesai, id_jadwal, keterangan },
         { where: { id: id } }
       );
 
