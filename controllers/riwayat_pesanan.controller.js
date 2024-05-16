@@ -71,21 +71,21 @@ async function update(req, res){
     try {
         const id = req.params.id;
         const [updatedRowsCount] = await models.Data_Riwayat_User.update(
-            { flag: true },
-            { where: { id: id } }
-          );
-      
-          if (updatedRowsCount > 0) {
-            res.status(200).json({
-              status: res.status,
-              message: "Flag updated successfully",
-            });
-          } else {
-            res.status(404).json({
-              status: res.status,
-              message: "Riwayat User not found",
-            });
-          }
+        { flag: true },
+        { where: { id: id } }
+        );
+    
+        if (updatedRowsCount > 0) {
+        res.status(200).json({
+            status: res.status,
+            message: "Flag updated successfully",
+        });
+        } else {
+        res.status(404).json({
+            status: res.status,
+            message: "Riwayat User not found",
+        });
+        }
     } catch (error) {
         res.status(500).json({
         status: res.status,

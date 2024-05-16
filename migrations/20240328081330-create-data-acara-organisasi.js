@@ -57,6 +57,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      id_jadwal: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Jadwals',
+          key: 'id'
+        },
+      },
       proposal_acara: {
         allowNull: false,
         type: Sequelize.STRING
